@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Practica HTML DWCC</title>
+
+  <style>
+    table,
+    th,
+    td,
+    tr {
+      border: 1px solid rgb(0, 0, 0);
+    }
+
+    html {
+      background-color: antiquewhite;
+    }
+
+    .bloque {
+      background-color: black;
+      color: white;
+      margin: 20px;
+      padding: 20px;
+    }
+
+    .grande {
+      font-size: 36px;
+    }
+
+    #parrafo1 {
+      background-color: lightblue;
+      color: black;
+      padding: 40px;
+      text-align: left;
+    }
+
+    .estilo1 {
+      background-color: tomato;
+      color: white;
+      padding: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Línea horizontal -->
+  <hr>
+
+  <!-- Cabeceras -->
+  <h1>Practica HTML para DWCC</h1>
+
+  <!-- Párrafos -->
+  <p>Esto es un párrafo</p>
+
+  <!-- Textos preformateados -->
+  <pre>
+    Esto
+    es
+    un
+    texto
+    preformateado
+  </pre>
+
+  <!-- Imágenes -->
+  <img src="./img/pinwino-feo.jpg" alt="pos eso, un pinwino feo" width="300px" height="150px">
+
+  <!-- Saltos de línea -->
+  <br>
+
+  <!-- Listas -->
+  <h3>No-ordenadita</h3>
+  <ul>
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+  </ul>
+
+  <br>
+
+  <h3>Ordenadita</h3>
+  <ol>
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+  </ol>
+
+  <br>
+
+  <!-- Botones -->
+  <button>Botonsiko</button>
+
+  <br>
+  <br>
+
+  <!-- Enlaces -->
+  <a href="https://www.edu.xunta.gal/centros/iespazomerce/aulavirtual/course/view.php?id=1010" target="_blank">Páxina
+    do módulo de
+    DWCC</a>
+
+  <br>
+  <br>
+
+  <!-- Tablas -->
+  <table>
+    <th colspan="3">Tablita pa</th>
+    <tr>
+      <td>celdita 1.1</td>
+      <td>celdita 1.2</td>
+      <td>celdita 1.3</td>
+    </tr>
+    <tr>
+      <td>celdita 2.1</td>
+      <td>celdita 2.2</td>
+      <td>celdita 2.3</td>
+    </tr>
+  </table>
+
+  <br>
+  <br>
+
+  <table>
+    <caption>Esto es un caption</caption>
+    <tr>
+      <td>celdita 1.1</td>
+      <td>celdita 1.2</td>
+      <td>celdita 1.3</td>
+      <td>celdita 1.4</td>
+    </tr>
+    <tr>
+      <td>celdita 2.1</td>
+      <td>celdita 2.2</td>
+      <td>celdita 2.3</td>
+      <td>celdita 2.4</td>
+    </tr>
+  </table>
+
+  <br>
+  <br>
+
+  <!-- Bloques y elementos de línea -->
+  <div>
+    <p>London is the
+      <span style="color: red;">capital city of England</span>.
+      It is the most populous city in the UK,
+      with a metropolitan area of over 13 million inhabitants.
+    </p>
+    <p>Un texto de prueba</p>
+  </div>
+
+  <br>
+  <br>
+
+  <!-- Clases -->
+  <div class="bloque">
+    <p class="grande">Londres</p>
+    <p>Londres es la capital de
+      Inglaterra</p>
+  </div>
+
+  <div class="bloque">
+    <p class="grande">Paris</p>
+    <p>Paris es la <span class="grande">capital</span> de
+      Francia.</p>
+  </div>
+
+  <br>
+  <br>
+
+  <!-- Identificadores -->
+  <pre id="parrafo1">
+    Este parrafo tiene el id:
+    parrafo1 y ningun otro elemento
+    podra usar este ide</pre>
+  <pre class="estilo1">
+    Este parrafo pertenece a la clase estilo1,
+    la cual puede ser usado por otros
+    elementos</pre>
+  <p class="estilo1">Este otro parrafo utiliza
+    tambien la clase estilo1</p>
+
+  <p><a href="#C6">Capitulo 6</a></p>
+  <p><a href="#C8">Capitulo 8</a></p>
+  <pre>
+
+
+
+
+
+  </pre>
+  <p id="C6">Capitulo 6</p>
+  <pre>
+
+
+
+
+
+  </pre>
+  <p id="C8">Capitulo 8</p>
+
+</body>
+
+</html>

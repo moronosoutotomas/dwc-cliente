@@ -1,0 +1,53 @@
+<!-- Ejercicio con tabla de colores en HTML -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tabla de colores</title>
+  <style>
+    table,
+    th,
+    td,
+    tr {
+      border: 1px solid rgb(0, 0, 0);
+    }
+
+    html {
+      background-color: antiquewhite;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Aqui va la tablita -->
+  <table>
+    <th colspan="3">Mi Tabla</th>
+    <tr>
+      <td>Cab 1</td>
+      <td>Cab 2</td>
+      <td>Cab 3</td>
+    </tr>
+    <tr>
+      <td style="background-color: red;">Rojo</td>
+      <td style="background-color: blue;" rowspan="2" colspan="2">Azul</td>
+    </tr>
+    <tr>
+      <td style="background-color: black; color: white;">Negro</td>
+    </tr>
+    <tr>
+      <td style="background-color: yellow;" colspan="2">Amarillo</td>
+      <td style="background-color: green;" rowspan="2">Verde</td>
+    </tr>
+    <tr>
+      <td style="background-color: black; color: white;">Negro</td>
+      <td style="background-color: black; color: white;">Negro</td>
+    </tr>
+    <!-- No se debe usar este atributo pero sin CSS estamos buenos -->
+    <caption align="bottom">Titulo Tabla</caption>
+  </table>
+
+</body>
+
+</html>

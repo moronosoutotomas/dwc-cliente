@@ -1,0 +1,58 @@
+<!-- Ejercicio 4 - funciones y pasos por valor/referencia-->
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio funciones</title>
+</head>
+
+<body>
+  <h1>Ejercicios con funciones</h1>
+
+  <script>
+    // Crear una funcion que recibe tres valores (int, bool y string), cambie sus valores,
+    // muestre dichos valores tanto dentro como fuera de la función.
+
+
+    function myFunc(entero, booleano, cadena) {
+      document.write("Los valores originales de los parámetros son: " + entero + ", " + booleano + ", " + cadena + "<br>");
+      entero = 2;
+      booleano = true;
+      cadena = 'not empty';
+      document.write("Los valores finales de los parámetros son: " + entero + ", " + booleano + ", " + cadena + "<br><br>");
+    }
+
+    myFunc(3, false, 'vacío');
+    a = myFunc(4, false, 'otra vez vacío')
+
+    // Asignación de una función anónima a una variable
+    let f = function (a, b) {
+      return a + b;
+    }
+
+    document.write(f(3, 1));
+
+    // Ejecución de una funcion sin ser invocada
+    (function () { a = 5; document.write("<br>" + a ** 2) })();
+
+    // Funciones anónimas con parámetros
+    x = 5;
+    y = 10;
+    // Encapsulación de variables
+    z = (function (x, y) { return x + y }(1, 2));
+    document.write("<br>" + z);
+    document.write("<br>" + eval(x + y));
+
+    var cadena1 = ("<br>Hola");
+    var cadena2 = (" y adios");
+
+    (function (str1, str2) { document.write(str1 + str2); }(cadena1, cadena2))
+
+  </script>
+
+</body>
+
+</html>

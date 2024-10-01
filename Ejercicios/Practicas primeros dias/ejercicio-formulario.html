@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio formulario</title>
+</head>
+
+<body>
+
+  <form action="" method="post" target="_blank" enctype="multipart/form-data">
+    <fieldset style="width: 600px;">
+      <legend>Datos personales</legend>
+
+      <label for="nombre_text">Nombre:</label>
+      <input type="text" id="nombre_text" placeholder="introduce tu nombre">
+
+      <label for="edad_number">Edad:</label>
+      <input type="number" id="edad_number" min="0">
+      <br><br>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email">
+
+      <label for="pwd">Contraseña:</label>
+      <input type="password" id="pwd">
+    </fieldset>
+
+    <br><br>
+
+    <fieldset style="width: 100px;">
+      <legend>Género</legend>
+      <input type="radio" name="genero" id="hombre" value="hombre">
+      <label for="hombre">Hombre</label>
+      <input type="radio" name="genero" id="mujer" value="mujer">
+      <label for="mujer">Mujer</label>
+    </fieldset>
+    <br><br>
+
+    <fieldset style="width: 300px;">
+      <legend>Intereses</legend>
+      <input type="checkbox" id="lectura" value="lectura">
+      <label for="lectura">Lectura</label>
+      <input type="checkbox" id="cine" value="cine">
+      <label for="cine">Cine</label>
+      <input type="checkbox" id="deporte" value="deporte">
+      <label for="deporte">Deporte</label>
+    </fieldset>
+    <br><br>
+
+    <label for="coches">Seleciona un coche:</label>
+    <br>
+    <select name="coches" id="coches" size="3" multiple>
+      <option value="seat">Seat</option>
+      <option value="kia">Kia</option>
+      <option value="fiat">Fiat</option>
+      <option value="toyota">Toyota</option>
+      <option value="mazda">Mazda</option>
+    </select>
+
+    <textarea name="descripcion_coche" id="" rows="3" cols="20" placeholder="describe tu coche"></textarea>
+    <br><br>
+
+    <label for="navegadores">Selecciona tu navegador:</label>
+    <input list="navegadores">
+    <datalist id="navegadores">
+      <option value="Firefox"></option>
+      <option value="Chrome"></option>
+      <option value="Opera"></option>
+      <option value="Edge"></option>
+    </datalist>
+    <br><br>
+
+    <label for="fecha">Cumplea&ntilde;os</label>
+    <input type="date" id="fecha">
+
+    <button type="button" onclick="alert('Hola')">Hola</button>
+    <input type="button" onclick="alert('Adi&oacute;s')" value="Adi&oacute;s">
+    <br><br>
+
+    <label for="color">Selecciona un color:</label>
+    <input type="color" id="color">
+    <br><br>
+
+    <label for="archivo">Seleccionar archivo:</label>
+    <input type="file" id="archivo">
+    <br><br>
+
+    <input type="submit" value="Enviar datos">
+    <input type="reset" value="Borrar datos">
+
+  </form>
+
+</body>
+
+</html>

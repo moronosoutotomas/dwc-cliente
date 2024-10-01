@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cálculo de áreas</title>
+  <style>
+    html {
+      font-family: sans-serif;
+      background-color: aquamarine;
+    }
+  </style>
+  <script src="ejercicio01-calculo-areas.js"></script>
+</head>
+
+<body>
+  <!-- <h1>Cálculo de áreas</h1>
+  <h3>Cuadrado</h3>
+  <p> Lado: 10cm </p>
+  <script>
+    let lado = 10;
+    document.write("<p>El área del cuadrado es: " + areaCuadrado(lado) + "cm</p>");
+  </script>
+
+  <h3>Triángulo</h3>
+  <p>Base: 10cm</p>
+  <p>Altura: 12cm</p>
+  <script>
+    let b = 10;
+    let h = 12;
+    document.write("<p>El área del triángulo es: " + areaTriangulo(b, h) + "cm</p>");
+  </script>
+
+  <h3>Circunferencia</h3>
+  <p>El radio es 5cm</p>
+  <script>
+    let r = 5;
+    document.write("<p>El área del triángulo es: " + areaCircunferencia(r).toFixed(2) + "cm</p>");
+    // .toFixed() redondea al número de decimales indicado
+  </script>
+  <br>
+
+  <hr> -->
+
+  <!-- 
+  
+  - Recogida de datos a través de formularios
+  - Procesado de datos a través de un botón
+  - Mostramos resultados
+  
+  -->
+
+  <h1>Recogida de datos</h1>
+  <form action="#">
+
+    <label for="cuadrado">Cuadrado:</label>
+    <input type="number" name="" id="ladoCuadrado" placeholder="introduce el lado (en cm)" min="1">
+    <input type="button" value="Calcular" onclick="areaCuadrado()">
+    <br><br>
+
+    <label for="triangulo">Triángulo</label>
+    <input type="number" name="baseTriangulo" id="baseTriangulo" placeholder="introduce la base (en cm)" min="1">
+    <input type="number" name="alturaTriangulo" id="alturaTriangulo" placeholder="introduce la altura (en cm)" min="1">
+    <input type="button" value="Calcular" onclick="areaTriangulo()">
+    <br><br>
+
+    <label for="circunferencia">Circunferencia</label>
+    <input type="number" name="radioCircunferencia" id="radioCircunferencia" placeholder="introduce el radio (en cm)"
+      min="1">
+    <input type="button" value="Calcular" onclick="areaCircunferencia()">
+    <br><br>
+  </form>
+
+  <p id="resultadoAreaCuadrado"></p>
+  <p id="resultadoAreaTriangulo"></p>
+  <p id="resultadoAreaCircunferencia"></p>
+
+</body>
+
+</html>

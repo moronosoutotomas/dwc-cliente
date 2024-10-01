@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fibonacci</title>
+  <style>
+    html {
+      background-color: aquamarine;
+      font-family: sans-serif;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Generador de 10 números Fibonacci</h1>
+
+  <form action="">
+    <label for="inicial">Dame el número inicial:</label>
+    <input type="number" name="inicial" id="inicial" min="1">
+    <input type="button" value="Iteración" onclick="fibonacciSecuence()">
+    <input type="button" value="Recursividad" onclick="exec()">
+  </form>
+  <br><br>
+
+  <p id="resultadoIterativa"></p>
+  <p id="resultadoRecursiva"></p>
+
+  <script src="ejercicio02-fibonacci.js"></script>
+</body>
+
+</html>

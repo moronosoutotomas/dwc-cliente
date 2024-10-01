@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Factorial</title>
+
+  <style>
+    html {
+      background-color: aquamarine;
+      font-family: sans-serif;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <h1>Factorial de un número</h1>
+
+  <form action="">
+    <label for="numero">Introduce un número: </label>
+    <input type="number" name="numero" id="numero" min="1">
+    <input type="button" value="Calcular" onclick="calcFactorial()">
+  </form>
+
+  <p id="resultado"></p>
+
+  <script>
+
+    function calcFactorial() {
+      num = document.getElementById("numero").value;
+
+      for (let i = num; i >= 0; i--)
+        if (num > 2) {
+          num *= num - 1;
+        }
+      document.getElementById("resultado").innerHTML = resultado;
+    }
+
+    function factorialRecursivo(n) {
+      if (n < 2) {
+        return 1;
+      } else {
+        return n * factorialRecursivo(n - 1)
+      }
+    }
+
+  </script>
+
+</body>
+
+</html>
