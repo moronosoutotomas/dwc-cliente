@@ -7,6 +7,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ejercicio funciones</title>
+  <style>
+    html {
+      background-color: aquamarine;
+      font-family: sans-serif;
+    }
+  </style>
 </head>
 
 <body>
@@ -50,6 +56,15 @@
     var cadena2 = (" y adios");
 
     (function (str1, str2) { document.write(str1 + str2); }(cadena1, cadena2))
+
+
+    function calcularMayor(a, b, c) {
+      return Math.max(a, b, c);
+    }
+
+    document.write("<br>Con la función 'calcularMayor' el mayor es: " + calcularMayor(1, 2, 3));
+
+    (function (a, b, c) { document.write("<br>Con la función anónima el mayor es: " + Math.max(a, b, c)); })(1, 2, 3);
 
   </script>
 
