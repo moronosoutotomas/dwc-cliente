@@ -114,23 +114,15 @@
     var precioUnidad3 = document.getElementById("precio-unidad3").value;
     var porcentaje3 = (document.getElementById("porcentaje3").value) / 100;
 
-    // Versión tradicional
-    // function calcularNomina(cantidad, precioUD, porcentaje) {
-    //   return (cantidad * precioUD * porcentaje) + (cantidad * precioUD);
-    // }
-
-    // Versión flecha
-    // var calcNom = (cant, pUD, porce) => (cantidad * precioUD * porcentaje) + (cantidad * precioUD);
-
-    var calcElemento1 = (c1, pu1, p1) => (c1 * pu1 * p1) + (c1 * pu1);
-    var calcElemento2 = (c2, pu2, p2) => (c2 * pu2 * p2) + (c2 * pu2);
-    var calcElemento3 = (c3, pu3, p3) => (c3 * pu3 * p3) + (c3 * pu3);
+    // Declaración de la función
+    var calcElemento = (cant, precioUD, porc) => (cant * precioUD * porc) + (cant * precioUD);
 
     function mostrarCalculos() {
       resultado = document.getElementById("resultado");
-      resultado.innerHTML += `<p>El resultado del primer elemento es: ${calcElemento1(cantidad1, precioUnidad1, porcentaje1)}</p>`;
-      resultado.innerHTML += `<p>El resultado del segundo elemento es: ${calcElemento2(cantidad2, precioUnidad2, porcentaje2)}</p>`;
-      resultado.innerHTML += `<p>El resultado del tercer elemento es: ${calcElemento3(cantidad3, precioUnidad3, porcentaje3)}</p>`;
+      resultado.innerHTML += `<h3>Resultados</h3>`;
+      resultado.innerHTML += `<p>El resultado del primer elemento es: ${calcElemento(cantidad1, precioUnidad1, porcentaje1)}</p>`;
+      resultado.innerHTML += `<p>El resultado del segundo elemento es: ${calcElemento(cantidad2, precioUnidad2, porcentaje2)}</p>`;
+      resultado.innerHTML += `<p>El resultado del tercer elemento es: ${calcElemento(cantidad3, precioUnidad3, porcentaje3)}</p>`;
     }
 
   </script>
