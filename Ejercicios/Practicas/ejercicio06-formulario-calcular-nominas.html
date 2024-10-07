@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cálculo nóminas</title>
+
+  <style>
+    html {
+      background-color: aquamarine;
+      font-family: sans-serif;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <h1>Cálculo nóminas</h1>
+
+  <form action="#" method="GET">
+
+    <!-- PRIMER ELEMENTO-->
+    <h3>Primer elemento</h3>
+
+    <label for="cantidad1">Cantidad</label>
+    <input type="number" name="cantidad1" id="cantidad1">
+
+    <br><br>
+
+    <label for="precio-unidad">Precio unidad</label>
+    <input type="number" name="precio-unidad1" id="precio-unidad1">
+
+    <br><br>
+
+    <label for="porcentaje1">Porcentaje</label>
+    <select name="porcentaje1" id="porcentaje1">
+      <option value="">--Escoge uno--</option>
+      <option value="6">6%</option>
+      <option value="12">12%</option>
+      <option value="18">18%</option>
+    </select>
+
+    <br><br>
+
+    <!-- SEGUNDO ELEMENTO-->
+    <h3>Segundo elemento</h3>
+
+    <label for="cantidad2">Cantidad</label>
+    <input type="number" name="cantidad2" id="cantidad2">
+
+    <br><br>
+
+    <label for="precio-unidad2">Precio unidad</label>
+    <input type="number" name="precio-unidad2" id="precio-unidad2">
+
+    <br><br>
+
+    <label for="porcentaje2">Porcentaje</label>
+    <select name="porcentaje2" id="porcentaje2">
+      <option value="">--Escoge uno--</option>
+      <option value="6">6%</option>
+      <option value="12">12%</option>
+      <option value="18">18%</option>
+    </select>
+
+    <br><br>
+
+    <!-- TERCER ELEMENTO-->
+    <h3>Tercer elemento</h3>
+
+    <label for="cantidad3">Cantidad</label>
+    <input type="number" name="cantidad3" id="cantidad3">
+
+    <br><br>
+
+    <label for="precio-unidad3">Precio unidad</label>
+    <input type="number" name="precio-unidad3" id="precio-unidad3">
+
+    <br><br>
+
+    <label for="porcentaje3">Porcentaje</label>
+    <select name="porcentaje3" id="porcentaje3">
+      <option value="">--Escoge uno--</option>
+      <option value="6">6%</option>
+      <option value="12">12%</option>
+      <option value="18">18%</option>
+    </select>
+
+    <br><br>
+
+    <input type="button" value="Enviar" id="enviar" onclick="mostrarCalculos()">
+    <input type="reset" value="Reset" id="reset">
+
+    <br><br>
+
+    <div id="resultado"></div>
+
+  </form>
+
+  <script>
+
+    // Declaración de variables por comodidad
+    var cantidad1 = document.getElementById("cantidad1").value;
+    var precioUnidad1 = document.getElementById("precio-unidad1").value;
+    var porcentaje1 = (document.getElementById("porcentaje1").value) / 100;
+
+    var cantidad2 = document.getElementById("cantidad2").value;
+    var precioUnidad2 = document.getElementById("precio-unidad2").value;
+    var porcentaje2 = (document.getElementById("porcentaje2").value) / 100;
+
+    var cantidad3 = document.getElementById("cantidad3").value;
+    var precioUnidad3 = document.getElementById("precio-unidad3").value;
+    var porcentaje3 = (document.getElementById("porcentaje3").value) / 100;
+
+    // Versión tradicional
+    // function calcularNomina(cantidad, precioUD, porcentaje) {
+    //   return (cantidad * precioUD * porcentaje) + (cantidad * precioUD);
+    // }
+
+    // Versión flecha
+    // var calcNom = (cant, pUD, porce) => (cantidad * precioUD * porcentaje) + (cantidad * precioUD);
+
+    var calcElemento1 = (c1, pu1, p1) => (c1 * pu1 * p1) + (c1 * pu1);
+    var calcElemento2 = (c2, pu2, p2) => (c2 * pu2 * p2) + (c2 * pu2);
+    var calcElemento3 = (c3, pu3, p3) => (c3 * pu3 * p3) + (c3 * pu3);
+
+    function mostrarCalculos() {
+      resultado = document.getElementById("resultado");
+      resultado.innerHTML += `<p>El resultado del primer elemento es: ${calcElemento1(cantidad1, precioUnidad1, porcentaje1)}</p>`;
+      resultado.innerHTML += `<p>El resultado del segundo elemento es: ${calcElemento2(cantidad2, precioUnidad2, porcentaje2)}</p>`;
+      resultado.innerHTML += `<p>El resultado del tercer elemento es: ${calcElemento3(cantidad3, precioUnidad3, porcentaje3)}</p>`;
+    }
+
+  </script>
+
+</body>
+
+</html>

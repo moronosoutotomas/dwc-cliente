@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arrow functions</title>
+</head>
+
+<body>
+  <h1>Arrow functions</h1>
+
+  <script>
+    // Funcion tradicional
+    function hola() {
+      return "hola1";
+    }
+    document.write(hola() + "<br>")
+
+    // Funcion anonima
+    var hola;
+    hola = function () {
+      return "hola2";
+    }
+    document.write(hola());
+
+    // Funciones flecha
+    hola = () => { return "hola3"; }
+    document.write(hola());
+
+    hola = () => "hola4";
+    document.write(hola());
+
+    var nombre = "Pepe";
+    saludar = saludo => saludo + nombre;
+    document.write("<br>" + saludar("Hola"));
+
+    sumar = (x, y) => {
+      document.write("<br />" + sumar(6, 10));
+    }
+
+    multiplicar = (x, y) => {
+      document.write("<br> Resultado: ");
+      return x * y;
+    }
+    document.write("<br>" + multiplicar(2, 6));
+
+
+  </script>
+
+</body>
+
+</html>
