@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arrays</title>
+  <style>
+    html {
+      font-family: sans-serif;
+    }
+
+    p {
+      color: blue;
+    }
+  </style>
+
+  <script>
+    function esPalindromo() {
+      let cadena = document.getElementById('texto').value;
+      let array = cadena.split('');
+      let arrayAlReves = array.reverse();
+      let cadenaReverse = arrayAlReves.toString();
+      document.getElementById("resultado").innerHTML = (cadena == cadenaReverse) ? "Es palíndromo" : "No es palíndromo";
+    }
+  </script>
+</head>
+
+<body>
+  <h1>Ejercicios con arrays</h1>
+
+  <form action="#" method="get">
+    <label for="texto">Introduce una cadena de texto por favor:</label>
+    <br>
+    <input type="text" name="texto" id="texto">
+    <br><br>
+    <input type="submit" value="Enviar" onclick="esPalindromo()">
+    <input type="reset" value="Reset">
+    <br><br>
+  </form>
+
+  <p id="resultado"></p>
+
+</body>
+
+</html>

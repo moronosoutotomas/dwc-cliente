@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mezcla de listas</title>
+  <style>
+    html {
+      font-family: sans-serif;
+    }
+  </style>
+  <script>
+
+    function checkLength() { // return bool
+      let lengthPrimera = document.getElementById('primeraLista').value.splice(1, ",");
+      let lengthSegunda = document.getElementById('segundaLista').value.splice(1, ",");
+      let bigSelectorPrimera = document.getElementById('selectorPrimera').value;
+      let bigSelectorSegunda = document.getElementById('selectorSegunda').value;
+
+      // (lengthPrimera > bigSelectorPrimera) ? true : false;
+      console.log(lengthPrimera);
+      console.log(lengthSegunda);
+      console.log(bigSelectorPrimera);
+      console.log(bigSelectorSegunda);
+
+
+    }
+
+    function mix() { // prints mixed arrays
+      let primera = document.getElementById('primeraLista').value.split(",");
+      let segunda = document.getElementById('segundaLista').value.split(",");
+
+      for (let i = 0; primera.length; i++) {
+
+      }
+
+
+      document.getElementById("resultado").innerHTML = "";
+    }
+
+  </script>
+</head>
+
+<body>
+  <h1>Mezcla de listas</h1>
+
+  <form action="#" method="get">
+    <label for="primeraLista">Primera lista:</label>
+    <br>
+    <input type="number" name="primeraLista" id="primeraLista">
+    <select name="" id="selectorPrimera">
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+    </select>
+    <br><br>
+    <label for="segundaLista">Segunda lista:</label>
+    <br>
+    <input type="number" name="segundaLista" id="segundaLista">
+    <select name="" id="selectorSegunda">
+      <option value="1">1</option>
+      <option value="2">2</option>
+    </select>
+    <br><br>
+    <input type="button" value="Mezclar" onclick="mix()">
+    <input type="reset" value="Reiniciar">
+  </form>
+
+  <p id="resultado"></p>
+
+
+</body>
+
+</html>
