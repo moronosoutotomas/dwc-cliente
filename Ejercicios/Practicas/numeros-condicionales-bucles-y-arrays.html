@@ -226,7 +226,32 @@
     <h3>Ordenación de arrays</h3>
     <script>
 
+      var cadenas = ["aabc", "abc", "zdc", "ew"];
+      var numeros = [4, 40, 2, 220, 1, 10];
 
+      document.write("<br />" + cadenas.sort());
+      document.write("<br />" + numeros.sort() + "< --!!!");
+
+      // Sort pasa dos valores a la funcion de comparacion y
+      // ordena los valores segun el valor que le venga
+      // devuelto
+      // Si la funcion devuelve un positivo, b va antes que a,
+      // si devuelve un negativo a va antes que b
+      document.write("<br />" + numeros.sort(function (a, b) { return a - b }));
+
+      // Coloca los valores de forma aleatoria
+      document.write("<br />" + numeros.sort(
+        function (a, b) {
+          return 0.5 -
+            Math.random()
+        }));
+
+      // Devolver el maximo de un array
+      function maximo(numeros) {
+        return Math.max.apply(null,
+          numeros)
+      };
+      document.write("<br />" + maximo(numeros));
 
     </script>
   </div>
@@ -235,7 +260,39 @@
     <h3>Iteración de arrays</h3>
     <script>
 
-
+      var numeros = [45, 4, 9, 16, 25];
+      function mostarVector(valor, indice, vector) {
+        document.write("Pos " + indice + " = " + valor + "<br/> ");
+      }
+      numeros.forEach(mostarVector);
+      function porDos(valor) {
+        return valor * 2;
+      }
+      var doble = numeros.map(porDos);
+      document.write(doble);
+      function filtrar(valor) {
+        return valor > 10;
+      }
+      var filtro = numeros.filter(filtrar);
+      document.write("<br />" + filtro);
+      function sumar(total, valor, indice, vector) {
+        return total + valor;
+      }
+      var sumatorio = numeros.reduce(sumar);
+      document.write("<br />" + sumatorio);
+      function comprobarTodos(valor) {
+        return valor > 10;
+      }
+      document.write("<br />" + numeros.every(comprobarTodos));
+      function comprobarAlgunos(valor) {
+        return valor > 10;
+      }
+      document.write("<br />" + numeros.some(comprobarAlgunos));
+      function encontrar(valor) {
+        return valor == 9;
+      }
+      document.write("<br />" + numeros.find(encontrar) + " pos= " +
+        numeros.findIndex(encontrar));
 
     </script>
   </div>
@@ -245,6 +302,24 @@
     <script>
 
 
+      // array de 4 x 4
+      var matriz = new Array(4);
+      for (i = 0; i < matriz.length; i++) {
+        matriz[i] = new Array(4);
+      }
+      // insercion de valores
+      for (i = 0; i < matriz.length; i++) {
+        for (j = 0; j < matriz[i].length; j++) {
+          matriz[i][j] = Math.ceil(Math.random() * 9);
+        }
+      }
+      // recorrido de la matriz
+      for (i = 0; i < matriz.length; i++) {
+        for (j = 0; j < matriz[i].length; j++) {
+          document.write(matriz[i][j] + " ");
+        }
+        document.write("<br />");
+      }
 
     </script>
   </div>
