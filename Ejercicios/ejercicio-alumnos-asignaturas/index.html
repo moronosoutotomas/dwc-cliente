@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alumnos y asignaturas</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./scripts.js"></script>
+</head>
+
+<body>
+  <h1>Alumnos y asignaturas</h1>
+
+  <h4>Recogida de datos</h4>
+  <form action="#" method="get" onsubmit="// FUNCION DE MARRAS">
+    <label for="asignaturas">Introduce las asignaturas:</label><br>
+    <input type="text" name="asignaturas" id="asignaturas">
+    <br><br>
+
+    <label for="alumnos">Introduce los alumnos:</label><br>
+    <input type="text" name="alumnos" id="alumnos">
+    <br><br>
+
+    <button type="reset">Reset</button>
+    <button type="submit">Enviar</button>
+  </form>
+
+  <br>
+  <hr>
+
+  <h4>Resultados</h4>
+  <table>
+    <thead>
+      <td><!-- la coordenada 1-1 de la tabla debe estar vacia --></td>
+      <td>Asignaturas</td>
+      <td><!-- iteración nombre asignatura --></td>
+      <td class="media">Media</td>
+    </thead>
+
+    <tr>
+      <td><!-- iteración nombre alumno --></td>
+      <td>nota x</td>
+      <td class="media"><!-- resultado media asignatura --></td>
+    </tr>
+  </table>
+
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+html {
+  font-family: sans-serif;
+}
+
+table,
+td {
+  border: 1px solid black;
+}
+
+thead {
+  background-color: green;
+}
+
+.media {
+  font-weight: bold;
+  background: rgb(255, 235, 120);
+}
+
+/* Notas < 3 */
+.rojo {
+  color: rgb(161, 0, 0);
+}
+
+/* Notas > 3 && < 5 */
+.amarillo {
+  color: rgb(168, 168, 0);
+}
+
+.filaPar {
+  background-color: gray;
+}
+
+.filaImpar {
+  background-color: lightgray;
+}
