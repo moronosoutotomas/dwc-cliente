@@ -13,7 +13,7 @@
   <h1>Alumnos y asignaturas</h1>
 
   <h4>Recogida de datos</h4>
-  <form action="#" method="get" onsubmit="// FUNCION DE MARRAS">
+  <form action="#" method="get">
     <label for="asignaturas">Introduce las asignaturas:</label><br>
     <input type="text" name="asignaturas" id="asignaturas">
     <br><br>
@@ -22,8 +22,8 @@
     <input type="text" name="alumnos" id="alumnos">
     <br><br>
 
-    <button type="reset">Reset</button>
-    <button type="submit">Enviar</button>
+    <button type="submit" onclick="procesarListas()">Enviar</button>
+    <button type="submit" onclick="mostrarTabla()">Mostrar tabla</button>
   </form>
 
   <br>
@@ -44,6 +44,8 @@
       <td class="media"><!-- resultado media asignatura --></td>
     </tr>
   </table>
+
+  <div id="resultado"></div>
 
 </body>
 

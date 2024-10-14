@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Notas</title>
+    <link rel="stylesheet" href="estilosPerplexity.css">
+</head>
+
+<body>
+    <h1>Gestión de Notas de Alumnos</h1>
+
+    <form id="notasForm">
+        <label for="asignaturas">Asignaturas (separadas por comas):</label>
+        <input type="text" id="asignaturas" required>
+        <label for="alumnos">Alumnos (separados por comas):</label>
+        <input type="text" id="alumnos" required>
+        <button type="submit">Generar Notas</button>
+    </form>
+
+    <button id="mostrarTabla" style="display:none;">Mostrar Tabla de Resultados</button>
+
+    <div id="resultados"></div>
+
+    <script src="scriptsPerplexity.js"></script>
+</body>
+
+</html>
