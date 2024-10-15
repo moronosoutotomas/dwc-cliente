@@ -24,7 +24,7 @@ function procesarListas() {
 
   // Check procesamiento correcto
   alert(
-    "Procesamiento correcto, pulse en 'mostrar listas' para visualizar la tabla"
+    "Procesamiento correcto, pulse en 'Mostrar tabla' para visualizar la tabla"
   );
 }
 
@@ -37,15 +37,21 @@ function calcularMedias(notas) {
  * Muestra el resultado del procesamiento
  */
 function mostrarTabla() {
+
+  // datos
+  let alumnos = document.getElementById('alumnos').value;
+  let asignaturas = document.getElementById('asignaturas').value;
+
   // donde printear
   let resultado = document.getElementById('resultado').innerHTML;
   let tabla = document.createElement('table');
 
+  // le añadimos el título a mano para evitar líos
+  document.getElementById('resultado').innerHTML = '<hr><h4>Resultados</h4>';
+
   // arrays de alumnos y asignaturas
   let asignaturasArray = asignaturas.split(',').map(item => item.trim());
   let alumnosArray = alumnos.split(',').map(item => item.trim());
-
-  let asigArr = asigArr.trim(asignaturas.split(','));
 
   // recorrido de alumnos (eje Y)
   for (let i = 0; i < alumnosArray.length; i++) {
@@ -54,14 +60,35 @@ function mostrarTabla() {
     // recorrido de asignaturas (eje X)
     for (let j = 0; j < asignaturasArray.length; j++) {
       var celda = document.createElement('td');
-      var textoCelda = document.createTextNode(j);
+      var textoCelda = document.createTextNode(Math.ceil(Math.random() * 10));
+      let asignatura = document.createTextNode(asignaturasArray[j]);
 
-      celda.appendChild(textoCelda);
+      // perplejos nos hayamos
+      if (i === 0) {
+        if (j === 0) {
+          celda.appendChild(document.createTextNode('Alumnos/Asignaturas'));
+        } else {
+          celda.appendChild(document.createTextNode(asignaturasArray[j - 1]));
+        }
+      } else {
+        if (j === 0) {
+          celda.appendChild(document.createTextNode(alumnosArray[i - 1]));
+        } else {
+          celda.appendChild(textoCelda);
+
+          // esto no funciona
+          if (textoCelda < 3) {
+            celda.className = "rojo";
+          }
+
+        }
+      }
       hilera.appendChild(celda);
     } // j
 
     tabla.appendChild(hilera);
   } // i
 
-  resultado = appendChild(tabla);
+  // No se puede hacer document.getElementById('resultado').innerHTML += algo;
+  document.getElementById('resultado').appendChild(tabla);
 }
