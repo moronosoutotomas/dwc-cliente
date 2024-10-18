@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumnos y Asignaturas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Formulario de Alumnos y y Asignaturas</h1>
+    <!-- event.preventDefault() evitara que se recarge la pagina cuando pulsemos el boton de submit -->
+    <form onsubmit="event.preventDefault(); procesarListas();">
+        <label for="asignaturas">Lista de Asignaturas (separadas por comas):</label><br>
+        <input type="text" id="asignaturas" placeholder="Matemáticas, Historia, Física"><br><br>
+
+        <label for="alumnos">Lista de Alumnos (separados por comas):</label><br>
+        <input type="text" id="alumnos" placeholder="Juan, María, Pedro"><br><br>
+
+        <button type="submit">Procesar Listas</button>
+    </form>
+    
+    <br />
+    <!-- Botón para mostrar la tabla -->
+    <button onclick="mostrarTablaNotas()">Mostrar Notas</button>
+
+    <div id="resultado"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

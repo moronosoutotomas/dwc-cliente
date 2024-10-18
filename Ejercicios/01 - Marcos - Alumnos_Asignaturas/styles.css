@@ -1,0 +1,39 @@
+/* Estilos para la tabla */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+table, th, td {
+    border: 1px solid black;
+}
+th {
+    background-color: #4CAF50; /* Color de fondo de la cabecera */
+    color: white; /* Color del texto en la cabecera */
+    padding: 10px;
+}
+td {
+    padding: 10px;
+    text-align: center;
+}
+/* Alternar colores en las filas */
+tr:nth-child(even) td {
+    background-color: #f2f2f2;
+}
+tr:nth-child(odd) td {
+    background-color: #e0e0e0;
+}
+/* Estilo para las celdas de las medias */
+.media {
+    background-color: #FFD700; /* Color dorado para destacar las medias */
+    font-weight: bold;
+}
+/* Colores condicionales para las notas */
+.nota-baja {
+    color: red;
+}
+.nota-media {
+    color: yellow;
+}
+.nota-alta {
+    color: black;
+}
