@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reloj</title>
+  <style>
+    html {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      background-color: rgb(148, 148, 148);
+    }
+
+    .relojPeroBien {
+      display: flex;
+      flex-flow: column wrap;
+      align-items: center;
+      justify-content: center;
+      margin: 10em 27em 2em;
+      padding: 2em;
+      background-color: rgb(210, 210, 210);
+      border-radius: 1em;
+      box-shadow: 5px 5px 5px rgb(50, 50, 50), 10px 10px 5px rgb(50, 50, 50);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="relojPeroBien">
+    <h1>Reloj</h1>
+    <p id="resultado"></p>
+    <p id="saludo"></p>
+    <button onclick="saludo()">Saludo</button>
+  </div>
+  <!--
+1. hora en formato adecuado
+2. actualizar hora actual por segundo [ HH:MM:SS ]
+-->
+
+  <script>
+
+
+
+    function reloj() {
+      let hora = new Date();
+      let time = `Son las ${hora.getHours().toString().padStart(2, '0')}:${hora.getMinutes().toString().padStart(2, '0')}:${hora.getSeconds().toString().padStart(2, '0')}\n`
+      return time;
+    }
+
+    // Ojo a esta función también: .toLocaleDateString()
+
+    setInterval(() => document.getElementById('resultado').innerHTML = reloj(), 1000);
+
+    function saludo() {
+      document.getElementById('saludo').innerHTML += "Hola\n";
+    }
+
+    // setTimeout(() => clearInterval(intervalo), 10000);
+
+  </script>
+</body>
+
+</html>
