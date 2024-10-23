@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calendario</title>
+</head>
+
+<body id="resultado">
+
+  <h2>Selecciona una fecha</h2>
+  <input type="date" id="fecha" onload="fechaHoy()">
+
+  <script>
+
+    /* const inputFecha = document.getElementById('fecha');
+
+    inputFecha.addEventListener('load', () => {
+      // Obteniendo el valor de la fecha seleccionada
+      const fechaSeleccionada = inputFecha.value;
+      console.log("Fecha seleccionada: " + fechaSeleccionada);
+    }) */
+
+    // Sin .addEventListener() sería:
+    /* function regDate() {
+      console.log("Fecha seleccionada: " + document.getElementById('fecha').value);
+    } */
+
+    // Mi solución
+    const fechaActual = new Date();
+    const parrafo = document.createElement('p');
+
+    parrafo.append(fechaActual);
+    document.getElementById('resultado').append(parrafo);
+
+
+    // Solución apropiada
+    function fechaHoy() {
+      const hoy = new Date();
+      const dia = hoy.getDay().toString().padStart(2, '0');
+      const mes = (hoy.getMonth() + 1).toString().padStart(2, '0');
+      const año = hoy.getFullYear();
+
+      return `${dia}-${mes}-${año}`; // Formato [ DD-MM-DDDD ]
+    }
+
+    // window.addEventListener('load', () => { document.getElementById('fecha').append(fechaHoy) })
+
+  </script>
+</body>
+
+</html>
