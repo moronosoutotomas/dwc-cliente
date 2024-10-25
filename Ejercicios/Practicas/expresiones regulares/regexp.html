@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expresiones regulares</title>
+  <style>
+    html {
+      font-family: system-ui;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Expresiones regulares</h1>
+
+  <script>
+
+    var txt = "En un lugar de La Mancha...";
+
+    document.write(txt.search("de"));
+    document.write("<br />" + txt.replace("de", "DE"));
+
+    document.write("<br />" + txt.search(/e la/i));
+    document.write("<br />" + txt.replace(/e la/i, "ELA"));
+
+    document.write("<br />" + txt.match(/lu+/i));
+    document.write("<br />" + (/lu+/i).test(txt));
+
+    var patron = /lu+/i;
+    document.write("<br />" + patron.exec(txt));
+
+  </script>
+</body>
+
+</html>
