@@ -46,17 +46,16 @@
       return `Estreno en:<br><br>${hora.getMonth().toString()} meses, ${hora.getDay().toString()} días, ${hora.getHours().toString().padStart(2, '0')} h, ${hora.getMinutes().toString().padStart(2, '0')} minutos, ${hora.getSeconds().toString().padStart(2, '0')} segs`;
     }
 
+    // Hacer función para formatear fecha
+
     function estrenoSW() {
-      let estreno = new Date("2024-10-28 11:25:00"); //2025-01-01 22:45:00
+      let estreno = new Date("2024-10-28 11:30:00"); //2025-01-01 22:45:00
       let hoy = new Date();
-      console.log("hoy " + hoy);
-      console.log("estreno " + estreno);
       let diferencia = estreno - hoy;
-      let fechaEstreno = new Date(diferencia);
 
       if (diferencia < 1000) {
         setTimeout(() => clearInterval(intervalo), 0);
-        resultado.innerHTML = "Xa foi !!";
+        resultado.innerHTML = "Chegou o día !!";
       }
 
       return `Estreno en:<br><br>${fechaEstreno.getMonth().toString()} meses, ${fechaEstreno.getDate().toString()} días, ${fechaEstreno.getHours().toString().padStart(2, '0')} h, ${fechaEstreno.getMinutes().toString().padStart(2, '0')} minutos y ${fechaEstreno.getSeconds().toString().padStart(2, '0')} segs`;
