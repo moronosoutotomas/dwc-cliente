@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reloj</title>
+  <style>
+    html {
+      font-family: system-ui;
+      font-size: 1.5em;
+    }
+
+    .relojPeroBien {
+      display: grid;
+      place-items: center;
+      margin-top: 10%;
+      margin-left: 25%;
+      margin-right: 25%;
+      height: 15em;
+      padding: 2em;
+      color: white;
+      background-color: rgb(35, 35, 35);
+      border-radius: 1em;
+      box-shadow: 1px 2px 3px 4px rgb(80, 80, 80, 0.6);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="relojPeroBien">
+    <h1>Star Wars 25</h1>
+    <p id="resultado"></p>
+  </div>
+
+  <!--
+1. hora en formato adecuado
+2. actualizar hora actual por segundo [ HH:MM:SS ]
+-->
+
+  <script>
+
+    function reloj() {
+      let hora = new Date();
+      return `Estreno en:<br><br>${hora.getMonth().toString()} meses, ${hora.getDay().toString()} días, ${hora.getHours().toString().padStart(2, '0')} h, ${hora.getMinutes().toString().padStart(2, '0')} minutos, ${hora.getSeconds().toString().padStart(2, '0')} segs`;
+    }
+
+    function estrenoSW() {
+      let estreno = new Date("2024-10-28 11:25:00"); //2025-01-01 22:45:00
+      let hoy = new Date();
+      console.log("hoy " + hoy);
+      console.log("estreno " + estreno);
+      let diferencia = estreno - hoy;
+      let fechaEstreno = new Date(diferencia);
+
+      if (diferencia < 1000) {
+        setTimeout(() => clearInterval(intervalo), 0);
+        resultado.innerHTML = "Xa foi !!";
+      }
+
+      return `Estreno en:<br><br>${fechaEstreno.getMonth().toString()} meses, ${fechaEstreno.getDate().toString()} días, ${fechaEstreno.getHours().toString().padStart(2, '0')} h, ${fechaEstreno.getMinutes().toString().padStart(2, '0')} minutos y ${fechaEstreno.getSeconds().toString().padStart(2, '0')} segs`;
+    }
+
+    resultado = document.getElementById('resultado');
+    let intervalo = setInterval(() => resultado.innerHTML = estrenoSW(), 1000);
+
+  </script>
+</body>
+
+</html>
