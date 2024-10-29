@@ -1,0 +1,27 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: system-ui;
+}
+
+html {
+  background-color: antiquewhite;
+}
+
+.container {
+  display: grid;
+  place-items: left;
+  margin-left: 15em;
+  margin-top: 3em;
+}
+
+h1 {
+  margin-bottom: 1em;
+}
+
+input,
+label {
+  margin-top: 0.125em;
+  margin-bottom: 0.125em;
+}
