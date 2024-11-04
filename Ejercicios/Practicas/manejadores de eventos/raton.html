@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+
+<body onload="iniciar()">
+  <script>
+    function setTexto01() {
+      document.getElementById("prueba").innerHTML = "Quita el raton!!!";
+    }
+    function setTextoInic() {
+      document.getElementById("prueba").innerHTML = "Pasa el raton...";
+    }
+    function iniciar() {
+      document.getElementById("prueba").innerHTML = "Pasa el raton...";
+    }
+  </script>
+  <div id="prueba" onmouseover="setTexto01()" onmouseout="setTextoInic()"></div>
+</body>
+
+</html>
