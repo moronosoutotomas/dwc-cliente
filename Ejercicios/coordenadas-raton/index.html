@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mouse coords</title>
+  <style>
+    #container {
+      font-family: system-ui, sans-serif;
+      background-color: wheat;
+      border-radius: 5px;
+      height: 300px;
+      display: block;
+      margin: auto;
+      padding: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="container">
+    <h1>Coordenadas del mouse</h1>
+    <p id="coordenadas"></p>
+    <h1>Coordenadas del último click</h1>
+    <p id="coordenadasClick"></p>
+  </div>
+
+  <script>
+    document.onmousemove = () => {
+      let x = event.clientX;
+      let y = event.clientY;
+
+      document.getElementById('coordenadas').innerText = `Eje X: ${x} \n Eje Y: ${y}`;
+    }
+
+    document.onclick = () => {
+      let x = event.pageX;
+      let y = event.pageY;
+
+      document.getElementById('coordenadasClick').innerText = `Eje X: ${x} \n Eje Y: ${y}`;
+    }
+  </script>
+</body>
+
+</html>

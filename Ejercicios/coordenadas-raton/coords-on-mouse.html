@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coords on mouse</title>
+  <style>
+    html {
+      font-family: system-ui;
+    }
+
+    label {
+      position: relative;
+      padding: 5px;
+      background-color: wheat;
+      border-radius: 5px;
+      box-shadow: 1px 2px 3px 4px rgb(20, 20, 20, 0.2);
+    }
+  </style>
+</head>
+
+<body>
+
+  <label id="coordenadas"></label>
+
+  <script>
+    document.onmousemove = () => {
+      let mostrarCoordenadas = document.getElementById('coordenadas');
+      let x = event.clientX;
+      let y = event.clientY;
+
+      let labelCoordX = x + 25;
+      let labelCoordY = y + 15;
+
+      mostrarCoordenadas.style.top = `${labelCoordY}px`;
+      mostrarCoordenadas.style.left = `${labelCoordX}px`;
+      // mostrarCoordenadas.innerText = `Eje X: ${x} \n Eje Y: ${y}`;
+
+      function date() {
+        let today = new Date();
+        let time = `${today.getHours().toString().padStart(2, '0')}h ${today.getMinutes().toString().padStart(2, '0')}min ${today.getSeconds().toString().padStart(2, '0')}s`;
+        mostrarCoordenadas.innerText = time;
+      }
+
+      date(); // ollo
+
+      setInterval(date, 1000); // ollo ca callback
+    }
+
+  </script>
+</body>
+
+</html>
