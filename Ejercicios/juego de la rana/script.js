@@ -1,35 +1,37 @@
 // variables
-//const html = document.getElementsByTagName('html');
 const rana = document.getElementById('rana');
 const puntuacion = document.getElementById('puntuacion');
+let punt_inicial = 0;
+let max_saltos = 20;
 let saltosRestantes = document.getElementById('saltosRestantes'); // desde 20
 let tiempoSalto = 2000; // en milisegundos
 
-// listeners
-rana.addEventListener('click', updateMarcador());
-//html.addEventListener('load', startMarcador());
+// escuchadores
+rana.onclick = updateMarcador();
+rana.onmouseover = () => {
+  rana.style.cursor = 'pointer';
+};
 
-function puntuar() {
-  // puntua al capturar la rana
-}
-
+// la rana salta, se encoge y la puntuacion aumenta
 function salto() {
-  // la rana salta al capturarla
-  tiempoSalto -= 250;
-}
 
-function rngCoords() {
-  // genero nuevas coords aleatoriamente
-}
-
-function redimensionarRana() {
+  tiempoSalto /= 4;
   rana.width -= 20;
   rana.height -= 20;
+
+  let x = Math.round(Math.random() * 1000);
+  let y = Math.round(Math.random() * 1000);
+
+
 }
 
+// actualiza el marcador
 function updateMarcador() {
-  puntuacion.innerText = punt_inicial++;
-  saltosRestantes.innerText = max_saltos--;
+  puntuacion.innerText = punt_inicial;
+  saltosRestantes.innerText = max_saltos;
+
+  punt_inicial++;
+  max_saltos++;
 }
 
-setInterval(redimensionarRana(), tiempoSalto);
+setInterval(salto, tiempoSalto);

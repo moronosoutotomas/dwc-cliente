@@ -32,9 +32,11 @@ html {
 
 #rana {
   display: flex;
+
   margin: auto;
   width: 300px;
   height: auto;
+
   border-radius: 40%;
   box-shadow: 1px 2px 3px 4px rgb(10, 10, 10, 0.2);
 }
