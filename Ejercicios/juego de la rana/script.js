@@ -10,6 +10,8 @@ const container = document.getElementById('container');
 const anchoPantalla = window.innerWidth - 200;
 const altoPantalla = window.innerHeight;
 
+// TODO: revisar las variables para meter algunas cosas mas en el estado inicial del juego
+
 // estado inicial del juego
 container.width = anchoPantalla + 'px';
 container.height = altoPantalla + 'px';
