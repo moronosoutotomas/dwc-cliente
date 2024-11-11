@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arrastrar y Soltar Imagen</title>
+  <style>
+    /* Estilos del contenedor */
+    #contenedor {
+      width: 100vw;
+      height: 100vh;
+      border: 2px solid #333;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Estilos de la imagen */
+    #imagen {
+      position: absolute;
+      top: 50px;
+      left: 50px;
+      cursor: grab;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="contenedor">
+    <img id="imagen" src="https://placehold.co/300x300" onmousedown="iniciarArrastre(event)">
+    </img>
+  </div>
+
+  <script>
+    // Variables para almacenar el desplazamiento inicial
+    let desplazamientoX = 0;
+    let desplazamientoY = 0;
+
+    // Función para iniciar el arrastre
+    function iniciarArrastre(evento) {
+      if (evento.button !== 0) return; // Solo iniciar si el botón izquierdo está presionado
+
+      evento.preventDefault(); // Prevenir el arrastre predeterminado del navegador
+
+      const imagen = evento.target;
+
+      // Obtener la posición inicial de la imagen en relación al punto de clic
+      desplazamientoX = evento.pageX - (parseInt(imagen.style.left) || 0);
+      desplazamientoY = evento.pageY - (parseInt(imagen.style.top) || 0);
+
+      // Asignar los eventos de movimiento y de soltar el mouse
+      imagen.onmousemove = moverImagen;
+      imagen.onmouseup = detenerArrastre;
+
+      // Mover la imagen a la posición inicial del clic
+      moverImagen(evento);
+    }
+
+    // Función para mover la imagen
+    function moverImagen(evento) {
+      const imagen = evento.target;
+
+      // Si el botón izquierdo no está presionado, detener el arrastre
+      if (evento.buttons !== 1) {
+        detenerArrastre();
+        return;
+      }
+
+      // Calcular y asignar la nueva posición
+      imagen.style.left = `${evento.pageX - desplazamientoX}px`;
+      imagen.style.top = `${evento.pageY - desplazamientoY}px`;
+    }
+
+    // Función para detener el arrastre
+    function detenerArrastre() {
+      const imagen = document.getElementById("imagen");
+
+      // Quitar los eventos de movimiento y de soltar el mouse
+      imagen.onmousemove = null;
+      imagen.onmouseup = null;
+    }
+  </script>
+</body>
+
+</html>

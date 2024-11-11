@@ -1,0 +1,15 @@
+* {
+  font-family: system-ui, sans-serif;
+  box-sizing: border-box;
+  background-color: lightskyblue;
+}
+
+img {
+  position: relative;
+  border-radius: 5px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+img:hover {
+  cursor: grab;
+}
