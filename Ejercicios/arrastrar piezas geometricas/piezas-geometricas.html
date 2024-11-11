@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drag de figuras geométricas</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div id="contenedor">
+    <img class="figura" id="circulo" src="./img/circulo.jpg" alt="circulo" onmousedown="iniciarArrastre(event)">
+    <img class="figura" id="triangulo" src="./img/triangulo.png" alt="triangulo" onmousedown="iniciarArrastre(event)">
+    <img class="figura" id="rectangulo" src="./img/rectangulo.png" alt="rectangulo"
+      onmousedown="iniciarArrastre(event)">
+
+    <div id="almacen">
+      <div class="caja" id="caja-circulo">Círculo</div>
+      <div class="caja" id="caja-triangulo">Triángulo</div>
+      <div class="caja" id="caja-rectangulo">Rectángulo</div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
