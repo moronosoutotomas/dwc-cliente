@@ -1,0 +1,28 @@
+* {
+  box-sizing: border-box;
+}
+
+#contenedor {
+  border: 1px solid black;
+  width: 300px;
+  position: relative;
+}
+
+#pinwino {
+  width: 280px;
+}
+
+#cuadradito {
+  background-color: #000;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  bottom: 0%;
+  right: 0%;
+}
+
+#cuadradito:hover {
+  cursor: pointer;
+  border-radius: 2px;
+  transform: scale(1.2);
+}
