@@ -45,3 +45,15 @@ function detenerArrastre() {
   imagen.onmousemove = null;
   imagen.onmouseup = null;
 }
+
+// Función para eliminar la figura cuando se posiciona encima de su caja
+function absorberFigura(evento) {
+  const cajaCirculo = document.getElementById('caja-circulo');
+  const topLeftCajaCirculo = cajaCirculo.pageX;
+  const bottomRightCajaCirculo = cajaCirculo.pageY;
+
+  console.log(topLeftCajaCirculo);
+  console.log(bottomRightCajaCirculo);
+}
+
+absorberFigura();
