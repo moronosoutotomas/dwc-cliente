@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alquiler de Motos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f4f4f9;
+    }
+
+    .contenedor {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .seleccion-fecha, .seleccion-modelo {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    #resultado {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="contenedor">
+    <h1>Planificación de Alquiler de Motos</h1>
+    <div class="seleccion-fecha">
+      <label for="fechaInicio">Fecha de inicio:</label>
+      <input type="date" id="fechaInicio" onchange="actualizarFechaFin()">
+      
+      <label for="fechaFin">Fecha de finalización:</label>
+      <input type="date" id="fechaFin">
+    </div>
+
+    <div class="seleccion-modelo">
+      <h2>Seleccione el modelo de moto</h2>
+      <label>
+        <input type="radio" name="modeloMoto" value="Harley Davidson" data-precio="20"> Harley Davidson - 20€/día
+      </label>
+      <label>
+        <input type="radio" name="modeloMoto" value="Honda" data-precio="15"> Honda - 15€/día
+      </label>
+      <label>
+        <input type="radio" name="modeloMoto" value="Yamaha" data-precio="12"> Yamaha - 12€/día
+      </label>
+    </div>
+
+    <button id="botonCalcular" onclick="calcularPrecio()">Calcular Precio Total</button>
+    
+    <div id="resultado"></div>
+  </div>
+
+  <script>
+    // Inicializar las fechas mínimas al cargar la página
+    function inicializarFechas() {
+      const hoy = new Date();
+      const hoyFormateado = hoy.toISOString().split("T")[0];
+      document.getElementById("fechaInicio").min = hoyFormateado;
+      document.getElementById("fechaInicio").value = hoyFormateado;
+
+      const manana = new Date(hoy);
+      manana.setDate(hoy.getDate() + 1);
+      const mananaFormateado = manana.toISOString().split("T")[0];
+      document.getElementById("fechaFin").min = mananaFormateado;
+      document.getElementById("fechaFin").value = mananaFormateado;
+    }
+
+    // Actualizar la fecha mínima de fin cuando cambia la fecha de inicio
+    function actualizarFechaFin() {
+      const fechaInicio = new Date(document.getElementById("fechaInicio").value);
+      fechaInicio.setDate(fechaInicio.getDate() + 1);
+      const fechaFinMinima = fechaInicio.toISOString().split("T")[0];
+      document.getElementById("fechaFin").min = fechaFinMinima;
+      document.getElementById("fechaFin").value = fechaFinMinima;
+    }
+
+    // Calcular el precio total del alquiler
+    function calcularPrecio() {
+      const fechaInicio = new Date(document.getElementById("fechaInicio").value);
+      const fechaFin = new Date(document.getElementById("fechaFin").value);
+      const diasAlquiler = (fechaFin - fechaInicio) / (1000 * 60 * 60 * 24);
+
+      const resultadoDiv = document.getElementById("resultado");
+      
+      if (diasAlquiler < 1) {
+        resultadoDiv.textContent = "Por favor, seleccione una fecha de fin válida.";
+        return;
+      }
+
+      const modeloSeleccionado = document.querySelector('input[name="modeloMoto"]:checked');
+      if (!modeloSeleccionado) {
+        resultadoDiv.textContent = "Por favor, seleccione un modelo de moto.";
+        return;
+      }
+
+      const precioPorDia = parseFloat(modeloSeleccionado.dataset.precio);
+      const precioTotal = precioPorDia * diasAlquiler;
+
+      resultadoDiv.textContent = `Precio total: ${precioTotal.toFixed(2)}€ para ${diasAlquiler} días de alquiler.`;
+    }
+
+    // Ejecutar la inicialización de fechas al cargar la página
+    inicializarFechas();
+  </script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redimensionar Imagen</title>
+  <style>
+    /* Contenedor que rodea la imagen y proporciona una estructura para el redimensionamiento */
+    #contenedor-imagen {
+      display: inline-block; /* Permite que el contenedor se ajuste al contenido */
+      position: relative; /* Necesario para posicionar la manija dentro del contenedor */
+      border: 1px solid #ddd; /* Bordes para resaltar el contenedor */
+      padding: 5px; /* Espacio entre el borde y la imagen */
+    }
+
+    /* Imagen redimensionable */
+    #imagen-redimensionable {
+      width: 200px; /* Ancho inicial */
+      height: auto; /* Mantiene la proporción de la imagen */
+    }
+
+    /* Manija de redimensionamiento en la esquina inferior derecha */
+    #cuadro {
+      width: 10px;
+      height: 10px;
+      background-color: #000; /* Color de la manija */
+      position: absolute; /* Posiciona la manija relativa al contenedor */
+      bottom: 0; /* Posiciona la manija en la parte inferior */
+      right: 0; /* Posiciona la manija en la parte derecha */
+      cursor: se-resize; /* Cambia el cursor a una flecha de redimensionamiento */
+    }
+  </style>
+</head>
+<body>
+
+<!-- Contenedor principal de la imagen y la manija de redimensionamiento -->
+<div id="contenedor-imagen">
+  <!-- Imagen redimensionable -->
+  <img src="./tux.jpg" id="imagen-redimensionable" alt="Imagen redimensionable">
+  <!-- Manija en la esquina inferior derecha para iniciar el redimensionamiento -->
+  <div id="cuadro"></div>
+</div>
+
+<script>
+  let redimensionando = false; // Variable de estado para rastrear si el redimensionamiento está activo
+
+  // Iniciar el redimensionamiento al hacer clic en la manija
+  document.getElementById("cuadro").onmousedown = e => {
+    redimensionando = true; // Activa el modo de redimensionamiento
+    e.preventDefault(); // Evita que otros comportamientos, como la selección de texto, interfieran
+  };
+
+  // Cambiar el tamaño de la imagen mientras el ratón se mueve
+  document.onmousemove = e => {
+    if (redimensionando) { // Solo se ejecuta si el redimensionamiento está activado
+      const contenedor = document.getElementById("contenedor-imagen").getBoundingClientRect(); // Obtiene la posición del contenedor
+      document.getElementById("imagen-redimensionable").style.width = `${e.clientX - contenedor.left}px`; // Calcula el nuevo ancho basado en la posición del ratón
+      document.getElementById("imagen-redimensionable").style.height = `${e.clientY - contenedor.top}px`; // Calcula el nuevo alto basado en la posición del ratón
+    }
+  };
+
+  // Finalizar el redimensionamiento al soltar el botón del ratón
+  document.onmouseup = () => redimensionando = false; // Desactiva el modo de redimensionamiento
+</script>
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redimensionar Imagen</title>
+  <style>
+    #contenedor {
+      display: inline-block;
+      position: relative;
+      border: 1px solid #ddd;
+      padding: 5px;
+    }
+    #imagen {
+      width: 200px;
+      height: auto;
+    }
+    #cuadro {
+      width: 10px;
+      height: 10px;
+      background-color: #000;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      cursor: se-resize;
+      display: none; /* Cuadro de redimensionamiento oculto por defecto */
+    }
+  </style>
+</head>
+<body>
+
+<!-- Contenedor que incluye la imagen y el cuadro de redimensionamiento -->
+<div id="contenedor">
+  <img src="./tux.jpg" id="imagen" alt="Imagen redimensionable">
+  <div id="cuadro"></div> <!-- Cambié class="cuadro" a id="cuadro" -->
+</div>
+
+<script>
+  const imagen = document.getElementById("imagen");
+  const cuadro = document.getElementById("cuadro");
+  let redimensionando = false;
+
+  // Iniciar el redimensionamiento al hacer clic en el cuadro
+  function iniciarRedimensionamiento(e) {
+    redimensionando = true;
+    e.preventDefault(); // Evita la selección de texto
+  }
+
+  // Ajustar el tamaño de la imagen durante el movimiento del ratón
+  function redimensionar(e) {
+    if (redimensionando) {
+      const dimImg = imagen.parentNode.getBoundingClientRect();
+      imagen.style.width = `${e.clientX - dimImg.left}px`;
+      imagen.style.height = `${e.clientY - dimImg.top}px`;
+    }
+  }
+
+  // Detener el redimensionamiento cuando se suelta el ratón
+  function detenerRedimensionamiento() {
+    redimensionando = false;
+  }
+
+  // Activar cuadro y listeners cuando se pulsa "R"
+  document.addEventListener('keydown', e => {
+    if (e.key.toLowerCase() === 'r') {
+      cuadro.style.display = 'block'; // Mostrar cuadro de redimensionamiento
+      cuadro.addEventListener('mousedown', iniciarRedimensionamiento);
+      document.addEventListener('mousemove', redimensionar);
+      document.addEventListener('mouseup', detenerRedimensionamiento);
+    }
+  });
+
+  // Desactivar cuadro y listeners cuando se suelta "R"
+  document.addEventListener('keyup', e => {
+    if (e.key.toLowerCase() === 'r') {
+      cuadro.style.display = 'none'; // Ocultar cuadro de redimensionamiento
+      cuadro.removeEventListener('mousedown', iniciarRedimensionamiento);
+      document.removeEventListener('mousemove', redimensionar);
+      document.removeEventListener('mouseup', detenerRedimensionamiento);
+    }
+  });
+</script>
+
+</body>
+</html>
