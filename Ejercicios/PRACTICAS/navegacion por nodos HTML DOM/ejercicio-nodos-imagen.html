@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio con nodos</title>
+</head>
+
+<body>
+
+  <script>
+    /*
+    1. crear 2 divs dentro del body
+    2. crear ids a los divs
+    3. crear un p con texto para cada div
+    */
+
+    // Creamos un texto
+    let lorem1 = document.createTextNode('1. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nostrum explicabo quae magnam iste deserunt, impedit veritatis. Ex velit ad omnis ipsam, quo facilis nobis. Deserunt ab repellendus ex quod assumenda?');
+    let lorem2 = document.createTextNode('2. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nostrum explicabo quae magnam iste deserunt, impedit veritatis. Ex velit ad omnis ipsam, quo facilis nobis. Deserunt ab repellendus ex quod assumenda?');
+
+    // Creamos 2 párrafos y los metemos en los divs
+    let p1 = document.createElement('p');
+    let p2 = document.createElement('p');
+
+    // Creamos 2 divs
+    let div1 = document.createElement('div');
+    let div2 = document.createElement('div');
+
+    // Creamos los ids de los divs
+    div1.setAttribute('id', 'div1');
+    div2.setAttribute('id', 'div2');
+
+    // Metemos el texto en los párrafos
+    p1.appendChild(lorem2);
+    p2.appendChild(lorem1);
+
+    // Metemos los párrafos en sus respectivos divs
+    div1.appendChild(p1);
+    div2.appendChild(p2);
+
+    // Metemos ambos divs en el body
+    document.body.appendChild(div1);
+    document.body.appendChild(div2);
+
+    // Intercambiar los párrafos de los divs usando cloneNode()
+    // Habría que eliminar los nodos originales con .remove()
+    /*
+    let clonP2 = p2.cloneNode(true);
+    let clonP1 = p1.cloneNode(true);
+    div2.appendChild(clonP1);
+    div1.appendChild(clonP2);
+    */
+
+    // Intercambiar los párrafos de los divs usando .replace()
+    /*
+    let parrafoDiv1 = p1;
+    div1.replaceChild(p2, p1);
+    div2.appendChild(parrafoDiv1);
+    */
+
+    // Por como funciona JS, si hacemos .appendChild() ya elimina la relación original
+    div1.appendChild(p2);
+    div2.appendChild(p1);
+
+    // Añadimos una imagen con atributos (src y alt) al body
+    let img = document.createElement('img');
+    img.setAttribute('src', 'perrito.png');
+    img.setAttribute('alt', 'fotito');
+    img.setAttribute('width', '300px');
+    img.setAttribute('style', 'display: none;');
+    document.body.insertBefore(img, div2);
+
+    // Botoncito arriba del todo que haga visible la imagen (otherwise no es visible)
+    let boton = document.createElement('button');
+    let textoBoton = document.createTextNode('Mostrar perrito');
+    boton.appendChild(textoBoton);
+
+    document.body.insertBefore(boton, div1);
+    boton.addEventListener('click', 'showImage()');
+
+    function showImage() {
+      img.setAttribute('style', 'display: block;');
+    }
+
+    // REVISAR ULTIMA PARTE
+
+  </script>
+</body>
+
+</html>
