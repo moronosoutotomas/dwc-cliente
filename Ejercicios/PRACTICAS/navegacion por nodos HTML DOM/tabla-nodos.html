@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tablita con nodos</title>
+</head>
+
+<body>
+  <script>
+
+    let datos = [
+      1, 2, 3, 4, 5,
+      6, 7, 8, 9, 10,
+      11, 12, 13, 14, 15,
+      16, 17, 18, 19, 20
+    ];
+
+    function generateRandomNums() {
+      return Array.from({ length: 10 }, () => Math.floor(Math.random() * 100) + 1);
+    }
+
+    const boton = document.createElement('button');
+    boton.addEventListener('click', () => { contenedor.innerHTML = '' })
+
+    let tabla = document.createElement('table');
+    let cabecera = document.createElement('thead')
+    let fila = document.createElement('tr');
+    let celda = document.createElement('td');
+    const texto = document.createTextNode('Números');
+
+
+    for (let i = 1; i < datos.length; i++) {
+      if (i === 0) {
+        fila.appendChild(cabecera);
+      } else if (i < 6) {
+        let num = document.createTextNode(`${datos[i]}`);
+        fila.appendChild(celda[num]);
+      }
+
+    }
+
+
+  </script>
+</body>
+
+</html>
