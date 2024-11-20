@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario con nodos</title>
+
+  <style>
+    * {
+      font-family: system-ui;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      padding-top: 5%;
+      width: 60%;
+      margin: auto;
+      background-color: lightblue;
+    }
+
+    fieldset {
+      display: block;
+      margin: auto;
+      /* width: fit-content;
+      height: fit-content; */
+      border-radius: 7px;
+      background-color: rgb(220, 220, 220);
+      box-shadow: 1px 2px 3px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    label,
+    input:not(.boton) {
+      display: block;
+      margin: 10px;
+    }
+
+    input {
+      height: 20px;
+    }
+
+    .boton {
+      margin: 5px 10px 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+
+    // generar formulario (nombre, apellido, telefono, boton insertar, boton borrar, boton procesar)
+    const body = document.body;
+    const fieldset = document.createElement('fieldset');
+
+    // Creamos la legend con su texto
+    const legend = document.createElement('legend');
+    const legendText = document.createTextNode('Datos del contacto');
+    legend.appendChild(legendText);
+    fieldset.appendChild(legend);
+
+    // Creamos el campo nombre
+    let labelNombre = document.createElement('label');
+    let inputNombre = document.createElement('input');
+    let nombre = document.createTextNode('nombre');
+
+    labelNombre.appendChild(nombre);
+
+    labelNombre.setAttribute('for', 'nombre');
+    inputNombre.setAttribute('type', 'text');
+    inputNombre.setAttribute('id', 'nombre');
+
+    fieldset.appendChild(labelNombre);
+    fieldset.appendChild(inputNombre);
+
+    // Creamos el campo apellidos
+    let labelApellidos = document.createElement('label');
+    let inputApellidos = document.createElement('input');
+    let apellidos = document.createTextNode('apellidos');
+
+    labelApellidos.appendChild(apellidos);
+
+    labelApellidos.setAttribute('for', 'apellidos');
+    inputApellidos.setAttribute('type', 'text');
+    inputApellidos.setAttribute('id', 'apellidos');
+
+    fieldset.appendChild(labelApellidos);
+    fieldset.appendChild(inputApellidos);
+
+
+    // Creamos el campo telefono
+    let labelTelefono = document.createElement('label');
+    let inputTelefono = document.createElement('input');
+    let telefono = document.createTextNode('telefono');
+
+    labelTelefono.appendChild(telefono);
+
+    labelTelefono.setAttribute('for', 'telefono');
+    inputTelefono.setAttribute('type', 'tel');
+    inputTelefono.setAttribute('id', 'telefono');
+
+    fieldset.appendChild(labelTelefono);
+    fieldset.appendChild(inputTelefono);
+
+
+    // Creamos los botones
+    let inputSubmit = document.createElement('button');
+    let textSubmit = document.createTextNode('insertar');
+    inputSubmit.appendChild(textSubmit);
+    inputSubmit.setAttribute('class', 'boton');
+    fieldset.appendChild(inputSubmit);
+
+    let inputReset = document.createElement('button');
+    inputReset.setAttribute('type', 'reset');
+    inputReset.setAttribute('value', 'borrar');
+    inputReset.setAttribute('class', 'boton');
+    fieldset.appendChild(inputReset);
+
+    body.appendChild(fieldset);
+
+    let inputProcesar = document.createElement('button')
+    inputProcesar.setAttribute('value', 'procesar');
+    inputProcesar.setAttribute('class', 'boton');
+
+
+    // almacenar en un array la info del formulario
+    let datosForm = [];
+
+    function guardarDatos() {
+      if ((document.getElementById('nombre').value !== '') && (document.getElementById('apellidos').value !== '') && (document.getElementById('telefono').value !== '')) {
+        let persona = {
+          nombre: document.getElementById('nombre').value,
+          apellidos: document.getElementById('apellidos').value,
+          telefono: document.getElementById('telefono').value
+        }
+        datosForm.push(persona);
+        alert('Usuario añadido correctamente!');
+      } else {
+        alert('Rellena todos los campos porfis!');
+      }
+    }
+
+    inputSubmit.addEventListener('click', guardarDatos);
+
+    // boton procesar que muestre una tabla con los datos
+
+
+  </script>
+</body>
+
+</html>
