@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>POO en JS</title>
+</head>
+
+<body>
+
+  <p id="p01"></p>
+
+  <script>
+
+    // Ejemplo 1
+    document.write('<h3>Ejemplo 1</h3>')
+
+    var persona = {
+      nombre: 'Pepe',
+      apellido: 'Pérez',
+      id: 123,
+      nombreCompleto: function () {
+        return `${this.nombre} ${this.apellido}`;
+      }
+    };
+
+    document.write(persona.nombre);
+    document.write("<br>" + persona['apellido']);
+    document.write("<br>" + persona['id']);
+    document.write("<br>" + persona.nombreCompleto());
+    document.write('<br>')
+
+    for (x in persona) {
+      document.write(persona[x] + " ");
+    }
+
+    // Ejemplo 2
+    document.write('<h3>Ejemplo 2</h3>')
+
+    persona.nacionalidad = 'española';
+    persona.sueldo = function () { return 3.5 * 500; };
+
+    delete persona.id;
+    delete persona.nombreCompleto;
+
+    for (x in persona) {
+      document.write(persona[x] + " ");
+    }
+
+
+    // Ejemplo 3
+    document.write('<h3>Ejemplo 3</h3>')
+
+    var vector = Object.values(persona);
+
+    for (x in vector) {
+      document.write(vector[x] + " ");
+    }
+
+
+    // Ejemplo 4
+    document.write('<h3>Ejemplo 4</h3>')
+
+    persona.id = "";
+
+    persona = {
+      set identificador(id) {
+        this.id = id;
+      },
+
+      get identificador() {
+        return this.id;
+      }
+    };
+
+    persona.identificador = 123;
+    document.write(persona.identificador);
+
+
+    // Ejemplo 5
+    // document.write('<h3>Ejemplo 5</h3>')
+
+    var obj = { counter: 0 };
+    Object.defineProperty(obj, "reset", {
+      get: function () { this.counter = 0; }
+    });
+    Object.defineProperty(obj, "incremetar", {
+      get: function () { this.counter++; }
+    });
+    Object.defineProperty(obj, "decrementar", {
+      get: function () { this.counter--; }
+    });
+    Object.defineProperty(obj, "add", {
+      set: function (value) { this.counter += value; }
+    });
+    Object.defineProperty(obj, "restar", {
+      set: function (value) { this.counter -= value; }
+    });
+    obj.reset;
+    obj.add = 5;
+    obj.restar = 1;
+    obj.incremetar;
+    obj.decrementar;
+    document.getElementById("p01").innerHTML = obj.counter;
+  </script>
+</body>
+
+</html>
