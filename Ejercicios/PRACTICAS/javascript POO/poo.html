@@ -103,6 +103,29 @@
     obj.incremetar;
     obj.decrementar;
     document.getElementById("p01").innerHTML = obj.counter;
+
+
+    // Ejemplo 6
+    document.write('<h3>Ejemplo 6</h3>')
+
+    function Persona(nombre, apellido, edad) {
+      this.nombre = nombre;
+      this.apellido = apellido;
+      this.edad = edad;
+      this.sueldo = 0;
+      this.setSueldo = function (factor) {
+        this.sueldo = 800 * factor;
+      };
+      this.datos = function () {
+        return this.nombre + " " +
+          this.apellido + " " +
+          this.edad + " " +
+          this.sueldo;
+      };
+    }
+    var empleado = new Persona("Pepe", "Perez", 25);
+    empleado.setSueldo(3);
+    document.write(empleado.datos());
   </script>
 </body>
 
