@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conceptos gatunos</title>
+</head>
+
+<body>
+
+  <script>
+
+    'use strict'
+
+
+    // Clase convencional
+    document.write('<h1>Clase convencional</h1>');
+
+    class Animal {
+
+      constructor(nombre) {
+        this.nombre = nombre;
+      }
+
+      get nombre() {
+        return this.nombre;
+      }
+
+      set nombre(newNombre) {
+        this.nombre = newNombre;
+      }
+    }
+
+    class Gato extends Animal {
+
+      constructor(patas, pelo, sonido) {
+        super(nombre);
+        this.patas = patas;
+        this.pelo = pelo;
+        this.sonido = sonido;
+      }
+
+      get patas() {
+        return this.patas;
+      }
+
+      set patas(newPatas) {
+        this.patas = newPatas;
+      }
+
+      get pelo() {
+        if (this.pelo) {
+          return 'tiene pelo';
+        } else {
+          return ' no tiene pelo';
+        }
+      }
+
+      set pelo(newPelo) {
+        this.pelo = newPelo;
+      }
+
+      maullido() {
+        return this.sonido;
+      }
+
+      // El toString() se obtiene con Object.getOwnProperties()
+    }
+
+    const gatoAccidentado = new Gato('Alan', 3, false, 'mia-auuuu');
+
+    document.write(`<p>${gatoAccidentado.getNombre()}</p>`);
+    document.write(`<p>${gatoAccidentado.maullido()}</p>`);
+
+
+    // Herencia con prototipos
+    document.write('<h1>Herencia</h1>');
+
+    const animal = {
+      reproduccion: ['oviparo', 'viviparo'],
+      respiracion: ['pulmones', 'branquias'],
+      habitat: ['terrestre', 'acuatico'],
+      alimentacion: ['carnivoro', 'herbivoro', 'omnivoro'],
+      sonido: '',
+    }
+
+    const perro = {
+      __proto__: animal,
+      sonido: 'guau',
+
+      sonido() {
+        return this.sonido
+      },
+    }
+
+    document.write('' + perro.sonido());
+
+  </script>
+</body>
+
+</html>
