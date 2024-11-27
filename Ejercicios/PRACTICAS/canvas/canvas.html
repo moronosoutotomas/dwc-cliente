@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canvas</title>
+  <style>
+    body {
+      /* display: flex;
+      justify-content: center; */
+      background-color: wheat;
+    }
+
+    canvas {
+      position: relative;
+      top: 0;
+      left: 0;
+
+      border-radius: 5px;
+      box-shadow: 1px 2px 3px 4px rgba(0, 0, 0, 0.2);
+      background-color: white;
+
+      width: 500px;
+      height: 500px;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <canvas id="canvas"></canvas>
+
+  <script>
+    const canvas = document.getElementById('canvas');
+
+    const xDOM = window.innerWidth;
+    const yDOM = window.innerHeight;
+
+    let margenAncho = (xDOM - canvas.width) / 2;
+    let margenAlto = (yDOM - canvas.height) / 2;
+
+    canvas.style.top = `${margenAlto}px`;
+    canvas.style.left = `${margenAncho}px`;
+
+    console.log(canvas.getBoundingClientRect());
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canvas</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      background-color: wheat;
+    }
+
+    canvas {
+      border-radius: 5px;
+      box-shadow: 1px 2px 3px 4px rgba(0, 0, 0, 0.2);
+      background-color: white;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <canvas id="canvas" height="750px" width="1000px"></canvas>
+
+  <script>
+
+    const canvas = document.getElementById("canvas");
+
+    if (canvas.getContext) {
+      const ctx = canvas.getContext("2d");
+    }
+
+    window.addEventListener('load', draw);
+
+    function draw() {
+      const canvas = document.getElementById("canvas");
+      if (canvas.getContext) {
+        const ctx = canvas.getContext("2d");
+
+        ctx.fillStyle = "rgb(200 0 0 / 75%)";
+        ctx.fillRect(10, 10, 50, 50);
+
+        ctx.fillStyle = "rgb(0 200 0 / 75%)";
+        ctx.fillRect(40, 40, 50, 50);
+
+        ctx.fillStyle = "rgb(0 0 200 / 75%)";
+        ctx.fillRect(70, 70, 50, 50);
+
+        // Un punto de 1px x 1px
+        ctx.fillRect(150, 10, 1, 1);
+
+        // Un punto de 5px x 5px
+        ctx.fillStyle = "rgb(0,0,0)";
+        ctx.fillRect(170, 10, 5, 5);
+
+        // Una recta de 1px x 30px
+        // ctx.strokeRect(190, 10, 30, 1);
+
+        ctx.beginPath();
+        ctx.moveTo(240, 10);
+        ctx.lineTo(300, 80);
+        ctx.strokeStyle = 'black';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      }
+
+      function pintacion(xStart, yStart, xEnd, yEnd) {
+        const contexto = document.getElementById("canvas").getContext("2d");
+        contexto.beginPath();
+        contexto.moveTo(xStart, yStart);
+        contexto.lineTo(xEnd, yEnd);
+        contexto.strokeStyle = 'black';
+        contexto.lineWidth = 1;
+        contexto.stroke();
+        contexto.arc(500, 500, 500, 0, 0);
+      }
+
+      // pintacion(190, 10, 30, 1);
+      // pintacion(300, 60, 50, 3);
+
+      function circulacion(xStart, yStart, startAngle, endAngle, radius) {
+        const contexto = document.getElementById("canvas").getContext("2d");
+        contexto.beginPath();
+        contexto.arc(xStart, yStart, startAngle, endAngle, radius);
+        contexto.fill();
+        contexto.stroke();
+      }
+
+      circulacion(400, 400, 50, 100, 100);
+    }
+
+  </script>
+</body>
+
+</html>
