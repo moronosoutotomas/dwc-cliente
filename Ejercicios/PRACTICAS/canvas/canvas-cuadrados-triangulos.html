@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cuadrados y triángulos</title>
+</head>
+
+<body>
+
+  <canvas id="canvas"></canvas>
+
+  <script>
+    const canvas = document.getElementById('canvas');
+    const contexto = canvas.getContext('2d');
+
+    function cuadrado() {
+      if (contexto) {
+        contexto.fillRect(40, 40, 200, 200);
+        contexto.clearRect(50, 50, 70, 70);
+        contexto.strokeRect(50, 50, 100, 100);
+      }
+    }
+
+    function triangulo() {
+      if (contexto) {
+        contexto.beginPath();
+        contexto.moveTo(85, 70); // params -> x, y
+        contexto.lineTo(110, 100);
+        contexto.lineTo(55, 100);
+        contexto.fill();
+      }
+    }
+
+    cuadrado();
+    triangulo();
+
+  </script>
+</body>
+
+</html>
