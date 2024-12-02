@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reloj pocho</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+
+    canvas {
+      border: 1px solid #000;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Reloj pocho</h1>
+  <canvas id="lienzo" width="500" height="500"></canvas>
+
+  <script>
+    const lienzo = document.getElementById("lienzo");
+    const contexto = lienzo.getContext("2d");
+
+    const centroX = lienzo.width / 2;
+    const centroY = lienzo.height / 2;
+    const radio = 150;
+    const angulo = 100;
+
+
+    function dibujarCircunferencia() {
+      contexto.beginPath();
+      contexto.arc(centroX, centroY, radio, 0, 2 * Math.PI);
+      contexto.strokeStyle = "black";
+      contexto.lineWidth = 2;
+      contexto.stroke();
+    }
+
+    function dibujarPunto(angulo) {
+
+      const anguloRadianes = (angulo * Math.PI) / 180;
+      const x = centroX + radio * Math.cos(-anguloRadianes);
+      const y = centroY + radio * Math.sin(-anguloRadianes);
+
+      contexto.beginPath();
+      contexto.arc(x, y, 5, 0, 2 * Math.PI);
+      contexto.fillStyle = "blue";
+      contexto.fill();
+    }
+
+    dibujarCircunferencia();
+    dibujarPunto();
+
+    // setInterval(dibujarPunto, 1000);
+
+  </script>
+</body>
+
+</html>
