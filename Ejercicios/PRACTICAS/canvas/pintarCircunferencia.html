@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Circunferencia</title>
+  <style>
+    #canvas {
+      background-color: lightblue;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+
+  <canvas id="canvas" width='1000px' height="1000px"></canvas>
+
+  <script>
+
+    const canvas = document.getElementById(('canvas'));
+    const contexto = canvas.getContext('2d');
+
+    function drawFullCircle(x, y, r, startAngle, endAngle) {
+      contexto.beginPath();
+      contexto.arc(x, y, r, startAngle, endAngle)
+      contexto.stroke();
+      contexto.closePath();
+    }
+
+    function drawPoint(x, y, radio, angulo,) {
+
+      // Angulo en radianes (recibes deg, pasas a rad)
+      angulo *= (Math.PI / 180);
+
+      // Punto respecto a la circunferencia
+      a = Math.trunc(Math.cos(anguloRadianes) * radio);
+      b = Math.trunc(Math.sin(anguloRadianes) * radio);
+
+      xFinal = x + a;
+      yFinal = y - b;
+
+      drawFullCircle(xFinal, yFinal, r, 0, 2 * Math.PI);
+    }
+
+    drawPoint(300, 300, 150, 0, 2 * Math.PI);
+
+
+  </script>
+</body>
+
+</html>
