@@ -26,12 +26,31 @@
     const lienzo = document.getElementById("lienzo");
     const contexto = lienzo.getContext("2d");
 
+
+    // Vars para el centro del canvas
     const centroX = lienzo.width / 2;
     const centroY = lienzo.height / 2;
+
+
+    // Vars para el tamaño del reloj
     const radio = 150;
-    const angulo = 100;
+    let angulos = 0;
 
 
+    // Array de posiciones horarias y contador
+    let puntos = [];
+    let punto = 0;
+
+    // Posicionamos la aguja en las 12 al iniciar el reloj
+    punto === 0 ? 12 : punto;
+
+    // Fn para calcular el ángulo de cada hora en tiempo de ejecución
+    function crearAngulos() {
+      angulos = Array.from({ length: 12 }), (v, i) => i + (360 / 12);
+    }
+
+
+    // Fn que dibuja la caja
     function dibujarCircunferencia() {
       contexto.beginPath();
       contexto.arc(centroX, centroY, radio, 0, 2 * Math.PI);
@@ -40,22 +59,48 @@
       contexto.stroke();
     }
 
+
+    // Fn que dibuja los puntos (los índices de las horas)
     function dibujarPunto(angulo) {
+      angulos.array.forEach(punto => {
+        const anguloRadianes = (angulo * Math.PI) / 180;
+        const x = centroX + radio * Math.cos(-anguloRadianes);
+        const y = centroY + radio * Math.sin(-anguloRadianes);
 
-      const anguloRadianes = (angulo * Math.PI) / 180;
-      const x = centroX + radio * Math.cos(-anguloRadianes);
-      const y = centroY + radio * Math.sin(-anguloRadianes);
+        puntos.push({ x, y });
 
-      contexto.beginPath();
-      contexto.arc(x, y, 5, 0, 2 * Math.PI);
-      contexto.fillStyle = "blue";
-      contexto.fill();
+        contexto.beginPath();
+        contexto.arc(x, y, 5, 0, 2 * Math.PI);
+        contexto.fillStyle = "grey";
+        contexto.fill();
+      });
     }
 
-    dibujarCircunferencia();
-    dibujarPunto();
 
-    // setInterval(dibujarPunto, 1000);
+    // Fn que dibuja la aguja
+    function dibujarAguja() {
+      // contexto.clearRect(0, 0, lienzo.width, lienzo.height);
+      contexto.beginPath();
+      contexto.moveTo(centroX, centroY);
+      contexto.lineTo(puntos[punto].x, puntos[punto].y);
+      contexto.strokeStyle = 'red';
+      contexto.lineWidth = 2;
+      contexto.stroke();
+    }
+
+
+    // Fn que pone en funcionamiento la maquinaria suiza xD
+    function darCuerda() {
+      crearAngulos();
+      dibujarPunto();
+      dibujarAguja();
+      punto++;
+    }
+
+
+    // Ejecución
+    dibujarCircunferencia();
+    setInterval(darCuerda, 1000);
 
   </script>
 </body>
