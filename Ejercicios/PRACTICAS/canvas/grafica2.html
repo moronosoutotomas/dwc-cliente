@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Graficando</title>
+  <title>Graficando 2</title>
   <style>
     * {
       font-family: sans-serif;
@@ -28,23 +28,16 @@
     const centroX = canvas.width / 8;
     const centroY = 7 * canvas.height / 8;
 
-    const valores = [5, 7, 28, 14, 200];
-    let proporciones = datos.map((x) => x * 10);
+    const valores = [{ x: 2, y: 7 }, { x: 4, y: 9 }, { x: 1, y: 2 }, { x: 1, y: 1 }, { x: 3, y: 4 }, { x: 4, y: 3 }];
 
-    // Calcular la mínima, maxima y media del array de valores
-    // let valoresTotal = 0;
-    // let valorMin = valores[0];
-    // let valorMax = 0;
+    let propX = 0;
+    let propY = 0;
+    let sumatorios = valores.forEach(element => {
+      propX += element.x;
+      propY += element.y;
+    });
 
-    // for (let i = 0; i < valores.length; i++) {
-    //   valoresTotal += valores[i];
-    //   valorMin = (valorMin > valores[i]) ? valores[i] : valorMin;
-    //   valorMax = (valorMax < valores[i]) ? valores[i] : valorMax;
-    // }
-
-    // const unidadMinima = (valoresTotal / valores.length) / 10;
-
-    console.log(centroX, centroY);
+    const proporciones = valores.map((obj) => [obj.x * (600 / propX), obj.y * (600 / propY)]);
 
     // Dibujar gráfico (los ejes en si)
     function axis() {
@@ -52,18 +45,25 @@
       c.moveTo(centroX * 7, centroY);
       c.lineTo(centroX, centroY);
       c.lineTo(centroX, 100);
-      c.lineWidth = 1;
       c.stroke();
       c.closePath();
     }
 
-    axis();
-
     // Dibujar los puntos de los ejes
+    function puntos(elemento) {
+      c.fillStyle = 'green';
+      c.fillRect(puntoFinal, (centroY - elemento[1]), elemento[0], elemento[1]);
+      puntoFinal += elemento[0];
+      // console.log("puntos: " + elemento);
+    }
 
+    let puntoFinal = centroX;
+    proporciones.forEach(e => {
+      puntos(e);
+      // console.log("fore: " + e);
+    });
 
-
-
+    axis();
 
   </script>
 </body>
