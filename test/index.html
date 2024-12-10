@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conversión K - C - F</title>
+  <script defer src="script.js"></script>
+  <style>
+    * {
+      font-family: system-ui, sans-serif;
+      box-sizing: border-box;
+      font-size: 18px;
+    }
+
+    body {
+      display: flex;
+      flex-flow: column;
+      justify-content: center;
+      align-items: center;
+      padding-top: 2em;
+    }
+
+    .contenedor {
+      display: flex;
+      flex-flow: column;
+      align-items: stretch;
+      gap: 1em;
+
+      width: 50%;
+      padding: 1em 3em 3em;
+      background-color: rgb(102, 204, 238);
+      border-radius: 1.5em;
+      box-shadow: 1px 2px 3px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    h1 {
+      font-size: 2em;
+    }
+
+    form {
+      display: flex;
+      flex-flow: column;
+      align-items: start;
+      gap: 1em;
+
+      input {
+        padding: .5em;
+        border-radius: 3px;
+        border: none;
+        border: 1px solid rgba(0, 0, 0, 0.5);
+      }
+
+      .labels {
+        display: flex;
+        gap: 1em;
+
+        .resultados {
+          padding: .5em;
+          border-radius: 3px;
+          background-color: lightgoldenrodyellow;
+          box-shadow: 1px 2px 3px 2px rgba(0, 0, 0, 0.2);
+          transition: transform .25s ease-in-out;
+        }
+
+        .resultados:hover {
+          cursor: pointer;
+          transform: scale(1.1);
+        }
+
+        .output {
+          visibility: hidden;
+          padding: .5em;
+          border-radius: 3px;
+          /* el coloreado irá en base a los resultados */
+          box-shadow: 1px 2px 3px 2px rgba(0, 0, 0, 0.2);
+        }
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="contenedor">
+    <h1>Conversor de Kelvin a Celsius/Farenheit</h1>
+    <form action="">
+      <input type="text" id="input" placeholder="Introduce Kelvin:">
+
+      <div class="labels">
+        <label class="resultados" id="quieroFarenheits">Ver en Farenheit</label>
+        <label class="resultados" id="quieroCelsius">Ver en Celsius</label>
+      </div>
+
+      <div id="output"></div>
+    </form>
+  </div>
+
+</body>
+
+</html>
