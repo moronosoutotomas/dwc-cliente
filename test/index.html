@@ -29,13 +29,14 @@
 
       width: 50%;
       padding: 1em 3em 3em;
-      background-color: rgb(102, 204, 238);
-      border-radius: 1.5em;
+      background-color: rgb(60, 175, 214);
+      border-radius: .5em;
       box-shadow: 1px 2px 3px 4px rgba(0, 0, 0, 0.3);
     }
 
     h1 {
       font-size: 2em;
+      color: white;
     }
 
     form {
@@ -57,8 +58,8 @@
 
         .resultados {
           padding: .5em;
-          border-radius: 3px;
-          background-color: lightgoldenrodyellow;
+          border-radius: 5px;
+          background-image: linear-gradient(to bottom, lightsalmon, lightgreen);
           box-shadow: 1px 2px 3px 2px rgba(0, 0, 0, 0.2);
           transition: transform .25s ease-in-out;
         }
@@ -67,14 +68,16 @@
           cursor: pointer;
           transform: scale(1.1);
         }
+      }
 
-        .output {
-          visibility: hidden;
-          padding: .5em;
-          border-radius: 3px;
-          /* el coloreado irá en base a los resultados */
-          box-shadow: 1px 2px 3px 2px rgba(0, 0, 0, 0.2);
-        }
+      #output {
+        display: grid;
+        width: 100%;
+        grid-template-columns: repeat(3, 1fr);
+        gap: .5em;
+
+        padding: .5em;
+        border-radius: 3px;
       }
     }
   </style>
@@ -86,6 +89,17 @@
     <h1>Conversor de Kelvin a Celsius/Farenheit</h1>
     <form action="">
       <input type="text" id="input" placeholder="Introduce Kelvin:">
+
+      <div>
+        <input type="checkbox" id="orden">
+        <label for="orden">Orden ascendente</label>
+      </div>
+
+      <div>
+        <input type="radio" name="radio" id="alto-contraste" value="alto-contraste"><label for="alto-contraste">Alto
+          contraste</label>
+        <input type="radio" name="radio" id="coloreado" value="coloreado"><label for="coloreado">Coloreado</label>
+      </div>
 
       <div class="labels">
         <label class="resultados" id="quieroFarenheits">Ver en Farenheit</label>
