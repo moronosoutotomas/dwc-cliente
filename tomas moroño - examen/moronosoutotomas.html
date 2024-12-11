@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Examen 1T Tomás Moroño</title>
+  <style>
+    * {
+      font-family: system-ui, sans-serif;
+    }
+
+    .contenedor {
+      display: block;
+      margin: 3em;
+    }
+
+    table {
+      border: 1px solid black;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="contenedor">
+
+    <h1>Gestión de inventario</h1>
+    <form action="">
+      <label for="input-productos">Introducir productos:</label>
+      <input type="text" id="input-productos">
+      <input type="submit" id="guardar" value="Guardar">
+      <br><br>
+      <input type="radio" name="orden" id="ordenPorNombre">
+      <label for="ordenPorNombre">Ordenar por nombre</label>
+      <input type="radio" name="orden" id="ordenPorFecha">
+      <label for="ordenPorFecha">Ordenar por fecha</label>
+    </form>
+
+    <div id="reloj"></div>
+
+  </div>
+
+  <script>
+    // 1. Generación Dinámica de la Estructura HTML
+    function formGen() {
+      let contenedor = document.createDocumentFragment();
+      let titulo = contenedor.appendChild(document.createElement('h1').appendChild(document.createTextNode('Gestión del inventario')));
+      let label = contenedor.appendChild(document.createElement('form').appendChild(document.createElement('label').appendChild(document.createTextNode('Introducir productos:'))));
+
+      document.body.appendChild(contenedor);
+    }
+    formGen();
+
+    // 2. Añadir Productos al Inventario
+    let arrayInput = document.getElementById('input-productos').value;
+
+
+
+
+
+
+    console.log(arrayInput);
+
+    // Creación de la tabla on load
+    document.addEventListener('load', (() => {
+      let tabla = document.createDocumentFragment();
+
+      const tdProducto = tabla
+        .appendChild(document.createElement("table"))
+        .appendChild(document.createElement("tr"))
+        .appendChild(document.createElement("td"));
+
+      const tdTimestamp = tabla
+        .appendChild(document.createElement("table"))
+        .appendChild(document.createElement("tr"))
+        .appendChild(document.createElement("td"));
+
+      tdProducto.textContent = 'producto';
+      tdTimestamp.textContent = 'timestamp';
+
+      document.body.appendChild(tabla);
+    })());
+
+
+
+
+
+
+
+
+
+    // 4. Reloj Digital Dinámico
+    let reloj = document.getElementById('reloj');
+
+    function relojito() {
+      reloj.innerHTML = '';
+
+      let hora = new Date();
+      let horaActual = `Hora actual: ${hora.getHours()}:${hora.getMinutes()}:${hora.getSeconds()}`;
+      let agujas = document.createTextNode(horaActual);
+
+      let parrafo = document.createElement('p');
+      parrafo.appendChild(agujas);
+      reloj.appendChild(parrafo);
+    }
+
+    setInterval(relojito, 1000);
+  </script>
+</body>
+
+</html>
