@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jugando con JS</title>
+</head>
+
+<body>
+  <h1>Jugando con JS</h1>
+
+  <script>
+
+    // Tipos de datos primitivos
+    // 1. string
+    // 2. number
+    // 3. boolean
+    // 4. Array
+    // 5. Object
+    // 6. undefined
+
+    // Datos complejos:
+    // 1. function
+    // 2. object
+
+    const x = 1;
+
+    const y = (() => { return x + 1; })();
+
+    const z = (() => { return x + y; })((() => { return x + 1; })());
+
+    const a = (() => document.write(x + 1))();
+    const b = () => document.write(x + 1);
+
+    console.log(x);
+
+    // setInterval(b, 1000);
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>
