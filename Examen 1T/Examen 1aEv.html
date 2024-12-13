@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de Inventario</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    h1 {
+      color: #333;
+    }
+    #reloj {
+      font-size: 1.2rem;
+      margin-top: 20px;
+      font-weight: bold;
+      text-align: left;
+    }
+    #tablaProductos {
+      width: 60%;
+      margin-top: 20px;
+      border-collapse: collapse;
+      display: none; /* Ocultar tabla inicialmente */
+    }
+    th {
+      background-color: #333;
+      color: #fff;
+      text-align: left;
+      padding: 8px;
+    }
+    td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: left;
+    }
+    tr:hover {
+      background-color: #f0f0f0;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    // Variable para almacenar el inventario
+    let inventario = [];
+
+    // Crear y añadir elementos HTML al DOM de forma dinámica
+    function crearEstructuraHTML() {
+      // Encabezado principal
+      const titulo = crearElemento('h1', { textContent: 'Gestión de Inventario' });
+      document.body.appendChild(titulo);
+
+      // Controles de entrada
+      const divControles = crearElemento('div');
+      const labelProductos = crearElemento('label', { textContent: 'Productos (separados por comas):' });
+      const inputProductos = crearElemento('input', { id: 'inputProductos', placeholder: 'Producto1, Producto2, ...' });
+      const btnAgregar = crearElemento('button', { id: 'btnAgregar', textContent: 'Añadir Productos' });
+
+      divControles.append(labelProductos, inputProductos, btnAgregar);
+      document.body.appendChild(divControles);
+
+      // Controles de ordenación
+      const divOrden = crearElemento('div', { style: 'margin-top: 20px;' });
+      divOrden.appendChild(crearElemento('label', { textContent: 'Ordenar por:' }));
+      divOrden.append(
+        crearRadio('orden', 'nombre', ' Nombre (A-Z)', true),
+        crearRadio('orden', 'fecha', ' Fecha de Adición', false)
+      );
+      document.body.appendChild(divOrden);
+
+      // Tabla de productos
+      const tablaProductos = crearElemento('table', { id: 'tablaProductos' });
+      const thead = crearElemento('thead');
+      const trHead = crearElemento('tr');
+      trHead.append(
+        crearElemento('th', { textContent: 'Elemento' }),
+        crearElemento('th', { textContent: 'TimeStamp' })
+      );
+      thead.appendChild(trHead);
+      tablaProductos.append(thead, crearElemento('tbody'));
+      document.body.appendChild(tablaProductos);
+
+      // Reloj
+      const divReloj = crearElemento('div', { id: 'reloj' });
+      divReloj.innerHTML = '<strong>Hora actual:</strong> <span id="hora"></span>';
+      document.body.appendChild(divReloj);
+    }
+
+    // Función auxiliar para crear un elemento con atributos
+    function crearElemento(tipo, atributos = {}) {
+      const elemento = document.createElement(tipo);
+      Object.assign(elemento, atributos);
+      return elemento;
+    }
+
+    // Función auxiliar para crear un radio button con etiqueta
+    function crearRadio(name, value, labelText, checked = false) {
+      const radio = crearElemento('input', { type: 'radio', name, value, checked });
+      const label = crearElemento('label', { textContent: labelText });
+      const container = crearElemento('span');
+      container.append(radio, label);
+      return container;
+    }
+
+    // Función para actualizar el reloj digital
+    function actualizarReloj() {
+      const ahora = new Date();
+      const horas = ahora.getHours().toString().padStart(2, '0');
+      const minutos = ahora.getMinutes().toString().padStart(2, '0');
+      const segundos = ahora.getSeconds().toString().padStart(2, '0');
+      document.getElementById('hora').textContent = `${horas}:${minutos}:${segundos}`;
+    }
+
+    // Función para renderizar la tabla
+    function renderizarTabla() {
+      const tabla = document.getElementById('tablaProductos');
+      const tbody = tabla.querySelector('tbody');
+      tbody.innerHTML = ''; // Limpiar la tabla antes de agregar filas
+
+      // Si no hay productos, ocultar la tabla
+      if (inventario.length === 0) {
+        tabla.style.display = 'none';
+        return;
+      }
+
+      // Mostrar tabla y renderizar productos
+      tabla.style.display = 'table';
+      inventario.forEach(producto => {
+        const fila = crearElemento('tr');
+        fila.append(
+          crearElemento('td', { textContent: producto.nombre }),
+          crearElemento('td', { textContent: producto.timestamp })
+        );
+
+        // Añadir eventos de hover para cambiar color
+        fila.addEventListener('mouseover', () => fila.style.backgroundColor = '#e0e0e0');
+        fila.addEventListener('mouseout', () => fila.style.backgroundColor = '');
+
+        tbody.appendChild(fila);
+      });
+    }
+
+    // Función para añadir productos al inventario
+    function añadirProductos() {
+      const input = document.getElementById('inputProductos');
+      const productos = input.value.split(',').map(p => p.trim());
+
+      productos.forEach(nombre => {
+        if (nombre && !inventario.some(p => p.nombre === nombre)) {
+          inventario.push({ nombre, timestamp: new Date().toLocaleString() });
+        } else if (nombre) {
+          alert(`El producto "${nombre}" ya existe.`);
+        }
+      });
+
+      input.value = ''; // Limpiar input
+      ordenarInventario(); // Ordenar y renderizar tabla
+    }
+
+    // Función para ordenar el inventario según el criterio seleccionado
+    function ordenarInventario() {
+      const criterio = document.querySelector('input[name="orden"]:checked').value;
+
+      if (criterio === 'nombre') {
+        inventario.sort((a, b) => a.nombre.localeCompare(b.nombre));
+      } else {
+        inventario.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+      }
+
+      renderizarTabla();
+    }
+
+    // Inicializar la aplicación
+    crearEstructuraHTML();
+    setInterval(actualizarReloj, 1000); // Actualizar reloj cada segundo
+
+    // Añadir eventos a los controles
+    document.getElementById('btnAgregar').addEventListener('click', añadirProductos);
+    document.querySelectorAll('input[name="orden"]').forEach(radio => {
+      radio.addEventListener('change', ordenarInventario);
+    });
+  </script>
+</body>
+</html>
