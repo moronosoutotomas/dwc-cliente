@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Callback asíncrono</title>
+</head>
+
+<body>
+
+  <script>
+    /** Función que simula un proceso asíncrono con setTimeout.
+* Recibe un callback que se ejecutará después de 2 segundos. */
+    function procesoAsincrono(callback) {
+      console.log("Proceso iniciado...");
+      setTimeout(function () {
+        const resultado = "Datos obtenidos tras un tiempo de espera";
+        // Invocamos el callback pasándole el resultado
+        callback(resultado);
+      }, 2000);
+    }
+
+    // Definimos el callback para manejar el resultado
+    function manejarResultado(dato) {
+      console.log("Callback manejando el resultado: " + dato);
+    }
+
+    // Llamamos a la función principal y pasamos nuestro callback
+    procesoAsincrono(manejarResultado);
+
+    // JSON Placeholder
+    fetch('https://jsonplaceholder.typicode.com/posts/1')
+      .then(response => response.json())
+      .then(json => console.log(json))
+  </script>
+</body>
+
+</html>
