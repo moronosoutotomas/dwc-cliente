@@ -10,6 +10,33 @@
       font-family: system-ui, sans-serif;
       background-color: lightblue;
     }
+
+    table {
+      background-color: white;
+      border-collapse: collapse;
+      margin-top: 1em;
+    }
+
+    tr:nth-child(even) {
+      background-color: lightgrey;
+    }
+
+    th {
+      background-color: lightgreen;
+    }
+
+    th::first-letter,
+    td::first-letter {
+      text-transform: capitalize;
+    }
+
+
+    th,
+    td {
+      border: 1px solid black;
+      border-radius: 5px;
+      padding: .5em;
+    }
   </style>
 </head>
 
@@ -24,6 +51,7 @@
   </select>
 
   <script>
+
     // ORGANIZACIÓN
     // selector num de tuplas
     // tabla con: id - titulo - contenido
@@ -34,9 +62,6 @@
     // 3. construir la tabla
     // 4. tamaño de pagina con .slice()
     // 5. construir paginacion
-
-    // tabla, tr, td
-
 
 
     // EJERCICIO
@@ -52,17 +77,25 @@
           // creamos el esqueleto para el thead
           let thead = document.createElement('thead');
 
-          // creamos una fila
+          // creamos una única fila para la cabecera
           let tr = document.createElement('tr');
 
-          // creamos un th para almacenar la propiedad
-          let th = document.createElement('th');
+          // cogemos todos los titulos del primer post (los demas son iguales)
+          let titulosCabeceras = Object.keys(datos[0]);
 
-          // creamos un textNode para almacenar el nombre de la propiedad
-          let thValue = document.createTextNode();
+          titulosCabeceras.forEach(titulo => {
+            // creamos un th para almacenar cada propiedad de la cabecera
+            let th = document.createElement('th');
+            // creamos un textNode para almacenar el valor de cada propiedad
+            let thValue = document.createTextNode(`${titulo}`);
+            th.appendChild(thValue);
+            tr.appendChild(th);
+          });
 
-
-
+          // introducimos la cabecera terminada en el thead
+          thead.appendChild(tr);
+          // introducimos el thead terminado en la tabla
+          tabla.appendChild(thead);
 
 
 
@@ -70,29 +103,32 @@
           // creamos el esqueleto para el tbody
           let tbody = document.createElement('tbody');
 
-          // creamos una fila por post (es un objeto)
-
-          // creamos un td para el contenido de la propiedad
-          let td = document.createElement('td');
-
-          // creamos un textNode con el texto de la propiedad
-          let tdValue = document.createTextNode();
+          // me recorro datos para acceder a los posts
+          datos.forEach(post => {
+            //console.log(post);
 
 
+            // creamos una fila por post (es un objeto)
+            let tr = document.createElement('tr');
 
+            // recorro cada post asociando td/propiedad
+            for (const propiedad in post) {
+              // creamos un td para el contenido de la propiedad
+              let td = document.createElement('td');
 
+              // creamos un textNode con el texto de la propiedad
+              let tdValue = document.createTextNode(`${post[propiedad]}`);
+              td.appendChild(tdValue);
+              tr.appendChild(td);
+            }
 
-          // recorremos el resultado asignando cada dato a una celda
-          datos.forEach(dato => {
-            // creamos las celdas con los datos
+            tbody.appendChild(tr);
+          });
+          // introducimos el tbody terminado en la tabla
+          tabla.appendChild(tbody);
 
-
-
-          }); // fin foreach
-
-
-
-
+          // finalmente introducimos la tabla en el documento
+          document.body.appendChild(tabla);
         }); // fin then
 
       // paginamos con datos.slice(inicio, fin). foreach();
