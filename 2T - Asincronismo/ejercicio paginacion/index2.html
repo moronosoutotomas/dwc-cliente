@@ -16,17 +16,24 @@
     }
 
     table {
+      margin-top: 1em;
       background-color: white;
       border-collapse: collapse;
-      margin-top: 1em;
+      border-radius: 3px;
+      box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.25);
     }
 
     tr:nth-child(even) {
       background-color: lightgrey;
     }
 
-    th {
+    thead {
       background-color: lightgreen;
+      border-radius: 3px;
+    }
+
+    th {
+      border-radius: 3px;
     }
 
     th::first-letter,
@@ -38,14 +45,13 @@
     th,
     td {
       padding: .5em;
-      border: 1px solid black;
-      border-radius: 5px;
     }
 
     div {
       margin-top: .5em;
       display: flex;
       flex-flow: row wrap;
+      justify-content: center;
       gap: .5em;
     }
 
@@ -212,7 +218,7 @@
     obtenerDatos();
 
     // Rellamamos a la función cuando se cambien los datos con el selector
-    document.getElementById('numTuplas').addEventListener('change', () => obtenerDatos());
+    document.getElementById('numTuplas').addEventListener('change', () => { pagina = 1; obtenerDatos() });
 
   </script>
 </body>
