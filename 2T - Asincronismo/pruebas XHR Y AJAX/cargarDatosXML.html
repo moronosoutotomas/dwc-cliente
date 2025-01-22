@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- XML Example
+
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <city>San Jose</city>
+  <firstName>John</firstName>
+  <lastName>Doe</lastName>
+  <state>CA</state>
+</root>
+
+-->
+
+
+  <script>
+    function cargarDatos() {
+      // 1. Crear la instancia
+      let xhr = new XMLHttpRequest();
+
+      // 2. Definir la URL que devuelve un documento XML
+      xhr.open('GET', 'https://mocktarget.apigee.net/xml', true);
+
+      // 3. evento para manejar la respuesta
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            // 4. Recibimos el DOM XML
+            let xmlDoc = xhr.responseXML;
+            console.log('Besito <3');
+
+            // 5. Manipular el DOM XML (ejemplo: leer etiquetas "usuario")
+            if (xmlDoc) {
+              let root = xmlDoc.getElementsByTagName('root');
+              for (let i = 0; i < root.length; i++) {
+                console.log('Usuario #' + (i + 1) + ':', root[i].textContent);
+              }
+            } else {
+              console.error('No se pudo interpretar la respuesta como XML.');
+            }
+          } else {
+            console.error('Error al cargar datos XML. Código de estado:', xhr.status);
+          }
+        }
+      };
+      xhr.send();
+    }
+
+    cargarDatos();
+  </script>
+</body>
+
+</html>

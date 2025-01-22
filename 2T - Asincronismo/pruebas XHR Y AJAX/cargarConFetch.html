@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+  <script>
+    async function cargarConFetch() {
+      try {
+        let respuesta = await fetch('https://mocktarget.apigee.net/json');
+        if (respuesta.ok) {
+          let datos = await respuesta.json();
+          datos.forEach(element => {
+            console.log(element);
+          });
+        } else {
+          console.error('Error con fetch. Código de estado: ', respuesta.status);
+        }
+      } catch (error) {
+        console.error('Error: ', error)
+      }
+    }
+
+    cargarConFetch();
+  </script>
+</body>
+
+</html>
