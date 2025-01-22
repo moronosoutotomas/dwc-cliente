@@ -4,13 +4,52 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Ejercicio asincronismo - CAA y sus provincias</title>
+  <style>
+    html {
+      font-family: system-ui, sans-serif;
+      background-color: lightblue;
+    }
+  </style>
 </head>
 
 <body>
 
+  <h1>Ejercicio asincronismo - CCAA y sus provincias</h1>
 
+  <script>
+    // 1. Traer toda la info de golpe
+    // 2. Hacer los radio buttons para cada CCAA (con el 1º seleccionada por defecto)
+    // 3. Mostrar las provincias la CCAA seleccionada
 
+    // La fn con XML
+    function fnXML() {
+      let xhr = new XMLHttpRequest();
+
+      xhr.open('get', './ccaa.xml', true);
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          // Aqui procesamos a gusto el XML
+        }
+      };
+      xhr.send();
+    }
+
+    // La fn para JSON
+    function fnJSON() {
+      let respuesta = fetch('./provincias.json')
+        .then(respuesta => {
+          let datos = respuesta.json();
+          console.log('fetch:', datos);
+        })
+        .catch(error => {
+          console.error('Error: ', error);
+        });
+    }
+
+    fnXML();
+    fnJSON();
+  </script>
 </body>
 
 </html>
