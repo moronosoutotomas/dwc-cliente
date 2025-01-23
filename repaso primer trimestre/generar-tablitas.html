@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generador de tablitas HTML</title>
+  <style>
+    html {
+      background-color: lightblue;
+      font-family: sans-serif;
+    }
+
+    table {
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 1em;
+      border: 1px solid rgba(0, 0, 0, 0.6);
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+    // 1. Ejemplo de ejercicio para un h1
+    let texto = document.createTextNode('Generando tablitas');
+    let h1 = document.createElement('h1');
+    h1.appendChild(texto);
+    document.body.appendChild(h1);
+
+    // 2. Ejemplo de ejercicio para una tabla dinámica
+
+    // Creamos 100 items (para probar la tabla sin la API)
+    let datos = new Array;
+    for (let i = 0; i < 5; i++) {
+      datos[i] = `item nº${i}`;
+    }
+
+    //console.log(datos);
+    // for (let i = 0; i < datos.length; i++) {
+    //   console.log(datos[i]);
+    // }
+
+    let table = document.createElement('table');
+    let thead = document.createElement('thead');
+    let tr = document.createElement('tr');
+    let encabezados = ['solo', 'algunos', 'items', 'y', 'ya'];
+
+    // Generamos los encabezados
+    encabezados.forEach(element => {
+      // Importante generar de cero la celda entera
+      let th = document.createElement('th');
+      th.appendChild(document.createTextNode(element));
+      tr.appendChild(th);
+    });
+    thead.appendChild(tr);
+    table.appendChild(thead);
+
+    // Generamos el cuerpo fuera porque sinó tenemos problemas con el scope
+    // para introducirlo en la tabla después
+    let tbody = document.createElement('tbody');
+    let row = document.createElement('tr');
+
+    function generaTabla() {
+      // Creamos la estructura de la tabla
+
+      datos.forEach(element => {
+        // Importante generar de cero la celda entera
+        let text = document.createTextNode(element);
+        let cell = document.createElement('td');
+
+        cell.appendChild(text);
+        row.appendChild(cell);
+      });
+
+      tbody.appendChild(row);
+    }
+
+    generaTabla();
+
+    table.appendChild(tbody);
+    document.body.appendChild(table);
+
+
+
+    // JSONPlaceholder
+    // fetch('https://jsonplaceholder.typicode.com/todos/1')
+    //   .then(response => response.json())
+    //   .then(json => console.log(json))
+  </script>
+</body>
+
+</html>
