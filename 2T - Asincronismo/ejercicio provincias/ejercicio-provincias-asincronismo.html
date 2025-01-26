@@ -17,28 +17,43 @@
 
   <h1>Ejercicio asincronismo - CCAA y sus provincias</h1>
 
+  <!-- <label for=""></label>
+  <input type="radio" name="" id=""> -->
+
   <script>
+    ////////////////////////////////////////////////////
+    //////// PARTE DE OBTENCIÓN DE DATOS ///////////////
+    ////////////////////////////////////////////////////
     // 1. Traer toda la info de golpe
     // 2. Hacer los radio buttons para cada CCAA (con el 1º seleccionada por defecto)
     // 3. Mostrar las provincias de la CCAA seleccionada
     // truco para forzar el evento del click: '.click()'
 
+    let listadoProvincias = [];
+    let listadoCCAA = [];
+
     // La fn con XML
     function fnXML() {
       let xhr = new XMLHttpRequest();
 
-      xhr.open('get', './ccaa.xml', true);
+      xhr.open('GET', './ccaa.xml', true);
       xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
           let xmlDoc = xhr.responseXML;
-          let comunidades = xmlDoc.getElementsByTagName('ccaa')[0].childNodes[0].nodeValue;
-          console.log(xmlDoc);
-          console.log(comunidades);
 
-          let text = document.createTextNode(xmlDoc);
-          let div = document.createElement('div');
-          div.appendChild(text);
-          document.body.appendChild(div);
+          if (xmlDoc) {
+            let comunidades = xmlDoc.getElementsByTagName('ccaa');
+
+            for (let i = 0; i < comunidades.length; i++) {
+              listadoCCAA.push({
+                id: comunidades[i].childNode[0].childNode[0].nodeValue,
+                nombre: comunidades[i].childNode[1].childNode[0].nodeValue
+              });
+            }
+            generarRadios();
+          }
+        } else {
+          console.error("Error al obtener los datos XML".xhr.status());
         }
       };
       xhr.send();
@@ -49,7 +64,14 @@
       let respuesta = fetch('./provincias.json')
         .then(respuesta => {
           let datos = respuesta.json();
-          console.log('fetch:', datos);
+          //console.log('fetch:', datos);
+        })
+        .then(datos => {
+          for (const key in provincias) {
+            provincias.forEach(provincia => {
+              listadoProvincias.push({ id: key, nombre: provincia });
+            });
+          }
         })
         .catch(error => {
           console.error('Error: ', error);
@@ -58,6 +80,59 @@
 
     fnXML();
     fnJSON();
+
+    ////////////////////////////////////////////////////
+    //////// PARTE DE GENERACIÓN DE HTML////////////////
+    ////////////////////////////////////////////////////
+
+    let lista = document.createElement('ul');
+
+    // Funcion para listar las CCAA (y los radiobuttons)
+    function generarRadios() {
+
+      listadoCCAA.forEach(comunidad => {
+        // Genero el radiobutton
+        let input = document.createElement('input');
+        input.setAttribute('type', 'radio');
+        input.setAttribute('name', 'ccaa');
+        input.setAttribute('id', comunidad.nombre);
+        input.setAttribute('value', comunidad.id);
+
+        // Por defecto hacemos que esté marcada la 1ª CA
+        if (comunidad.id == 1) {
+          input.setAttribute('checked');
+        }
+
+        // Les añado un escuchador para el click
+        input.addEventListener('click', desplegarProvincias);
+
+        // Genero su label ya asociada
+        let label = document.createElement('label');
+        label.setAttribute('for', comunidad.nombre);
+        label.textContent = comunidad.nombre;
+
+        // Añado ambos al DOM
+        document.body.appendChild(input);
+        document.body.appendChild(label);
+      });
+    }
+
+    function desplegarProvincias() {
+      let comunidadSelected = document.querySelector('input[type=radio]:checked').value;
+
+      provincias.forEach(provincia => {
+        if (provincia.id == comunidadSelected) {
+          let listItem = document.createElement('li');
+          listItem.textContent = provincia.nombre;
+
+          lista.appendChild(listItem);
+        }
+      });
+
+      document.body.appendChild(lista);
+    }
+
+
   </script>
 </body>
 
