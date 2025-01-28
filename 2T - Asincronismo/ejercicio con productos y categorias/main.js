@@ -29,8 +29,6 @@ fetch('productos.json')
   .then(data => {
     // Aqui manejamos el objeto JS resultante
     listadoProductos = data;
-
-    //console.log(listadoProductos);
   })
   .catch(error => {
     // Manejamos cualquier error durante la petición
@@ -47,23 +45,54 @@ fetch('categorias.xml')
     if (!response.ok) {
       throw new Error('Error en la respuesta: ' + response.status);
     }
+    return response.text();
+  })
+  .then(datos => {
     // Creamos una instancia del parser
     const parser = new DOMParser();
 
     // Parseamos la cadena con su debido formato
-    const xmlDoc = parser.parseFromString(response, 'text/html');
+    const xmlDoc = parser.parseFromString(datos, 'text/html');
+    let categorias = xmlDoc.getElementsByTagName('categoria');
 
-    //console.log(xmlDoc);
-  })
-  .then(data => {
-    listadoProductos = data;
+    for (let i = 0; i < categorias.length; i++) {
+      // Obtenemos los datos de cada categoría
+      let nombreCategoria = categorias[i].getElementsByTagName('nombre')[0].textContent;
+      let idCategoria = categorias[i].getAttributeNode('id').textContent;
+
+      // Y los imprimimos
+      console.log(`ID: ${idCategoria}, Nombre: ${nombreCategoria}`);
+    }
   })
   .catch(error => {
     console.error('Ha ocurrido un error: ', error);
   });
 
 
-// Combinar info
-for (let i = 0; i < listadoCategorias.length; i++) {
 
+
+// TODO Combinar info
+//for (let i = 0; i < listadoCategorias.length; i++) {}
+
+
+
+// Generamos la tabla
+let tabla = document.createElement('table');
+let cabecera = document.createElement('thead');
+let cuerpo = document.createElement('tbody');
+
+function makeTable() {
+  // id_producto, nombre, categoria serán las cabeceras
+  listadoProductos.forEach(producto => {
+    let td = document.createElement('td');
+    td.textContent = producto;
+
+    // TODO
+  });
 }
+
+
+
+
+// Para ordenar por las cabeceras añadir un .addEventListener() a cada cabecera
+// que genere de nuevo la tabla a partir de un array ordenado por dicha cabecera
