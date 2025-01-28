@@ -1,0 +1,36 @@
+html {
+  font-family: sans-serif;
+  color: rgba(0, 0, 0, 0.8);
+  background-color: lightblue;
+}
+
+table {
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5), 0 3px 6px 5px rgba(0, 0, 0, 0.4);
+  border-collapse: collapse;
+}
+
+th {
+  text-transform: capitalize;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+td,
+th {
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  padding: .75em 1em;
+}
+
+thead {
+  background-color: rgba(255, 235, 194, 0.522);
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #fff;
+}
+
+tbody tr:nth-child(even) {
+  background-color: rgba(230, 230, 230);
+}
