@@ -153,6 +153,8 @@ function makeTable() {
 // que genere de nuevo la tabla a partir de un array ordenado por dicha cabecera
 function ordenarPorCampo(campo, estadoOrden) {
 	productos.sort((a, b) => estadoOrden ? a[campo].localCompare(b[campo]) : b[campo].localCompare(a[campo]));
-	makeTable();
+	//makeTable();
 	return !estadoOrden;
 }
+
+// TODO importar y exportar CSV
