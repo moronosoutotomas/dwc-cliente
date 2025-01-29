@@ -92,19 +92,22 @@ function combinarDatos() {
 			}
 		});
 	});
-	//console.log(productos);
 }
 
 // Generamos la tabla
-let container = document.getElementById('container');
-let tabla = document.createElement('table');
-let cabecera = document.createElement('thead');
-let cuerpo = document.createElement('tbody');
-
 function makeTable() {
-	// Creamos el encabezado
-	let rowHeader = document.createElement('tr');
+	let container = document.getElementById('container');
+	let tabla = document.createElement('table');
+	let cabecera = document.createElement('thead');
+	let cuerpo = document.createElement('tbody');
 
+	// Creamos el título y lo metemos en el contenedor
+	let titulo = document.createElement('h1');
+	titulo.textContent = 'Categorías y productos'
+	container.appendChild(titulo);
+
+	// Creamos el encabezado y lo metemos en el contenedor
+	let rowHeader = document.createElement('tr');
 	Object.keys(productos[0]).forEach(key => {
 		let th = document.createElement('th');
 		th.textContent = key;
@@ -115,20 +118,41 @@ function makeTable() {
 	// Creamos la información de la tabla
 	productos.forEach(producto => {
 		let rowBody = document.createElement('tr');
-
 		Object.values(producto).forEach(value => {
 			let td = document.createElement('td');
 			td.textContent = value;
-
 			rowBody.appendChild(td);
 		});
 
+		// Añadimos el resto de la tabla
 		cuerpo.appendChild(rowBody);
 		tabla.appendChild(cabecera);
 		tabla.appendChild(cuerpo);
 		container.appendChild(tabla);
+		console.log(tabla);
 	});
+
+	// Añadimos el botón para convertir a PDF
+	let botonPDF = document.createElement('button');
+	botonPDF.textContent = 'Convertir a PDF';
+	botonPDF.style.margin = '1.5em 0';
+	botonPDF.style.padding = '.5em';
+	botonPDF.style.fontSize = '1.1em';
+	botonPDF.style.boxShadow = 'var(--sombra)';
+	botonPDF.addEventListener('click', () => {
+		const { jsPDF } = window.jspdf; // esto es 100% necesario
+		let doc = new jsPDF();
+		doc.setProperties()
+		doc.autoTable({ html: tabla });
+		doc.save('table.pdf');
+	});
+	container.appendChild(botonPDF);
 }
 
 // Para ordenar por las cabeceras añadir un .addEventListener() a cada cabecera
 // que genere de nuevo la tabla a partir de un array ordenado por dicha cabecera
+function ordenarPorCampo(campo, estadoOrden) {
+	productos.sort((a, b) => estadoOrden ? a[campo].localCompare(b[campo]) : b[campo].localCompare(a[campo]));
+	makeTable();
+	return !estadoOrden;
+}

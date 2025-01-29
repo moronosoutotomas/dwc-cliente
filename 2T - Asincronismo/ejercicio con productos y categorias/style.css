@@ -1,3 +1,7 @@
+:root {
+  --sombra: 0 4px 3px rgba(0, 0, 0, 0.5);
+}
+
 html {
   font-family: sans-serif;
   color: rgba(0, 0, 0, 0.8);
@@ -5,7 +9,7 @@ html {
 }
 
 table {
-  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5), 0 3px 6px 5px rgba(0, 0, 0, 0.4);
+  box-shadow: var(--sombra), 0 3px 6px 5px rgba(0, 0, 0, 0.4);
   border-collapse: collapse;
 }
 
