@@ -26,17 +26,56 @@
     // eliminemos posición y así recorremos solamente los números faltantes.
 
 
-    // const winner = [1, 2, 3, 4, 5, 6];
+    // Boleto participante, boleto ganador, bombo y listado de aciertos.
     const aciertos = [];
+    let aciertos2 = 0;
+    const winner = [];
+    const bombo = [];
 
-    for (let i = 0; i < 7; i++) {
-      winner = Math.ceil(Math.random() * 100 - 50);
+    const boleto = [1, 2, 3, 4, 5, 6];
+
+    // Generamos el boleto ganador (6 valores absolutos del 0 al 49).
+    for (let i = 0; i < 6; i++) {
+      // TODO: esto funciona mal
+      winner[i] = i;
+      winner[i - 1] = i;
+      do {
+        winner[i] = Math.abs(Math.ceil(Math.random() * 100 - 50));
+      } while (winner[i] === winner[i - 1]);
+
     }
+
+    // Generamos el bombo (50 valores absolutos del 1 al 50).
+    for (let i = 0; i < 50; i++) {
+      bombo[i] = (i + 1);
+    }
+
+    // Función que compara los aciertos del participante con las bolas del bombo
+    function checkAciertos() {
+      // for (let i = 0; i < bombo.length; i++) {
+      //   do {
+      //     for (let j = 0; j < boleto.length; j++) {
+      //       if (i === j) {
+      //         let k = 0;
+      //         aciertos[k++] = 1;
+      //       }
+      //     }
+      //   } while (aciertos[5] != 1);
+      // }
+
+      winner.forEach(bola => {
+        boleto.forEach(numero => {
+          if (bola === numero) {
+            aciertos2++;
+          }
+        })
+      }
+      )
+    }
+
+    checkAciertos();
     console.log(winner);
-
-
-
-
+    console.log(aciertos2);
 
 
 

@@ -16,7 +16,6 @@
 <body>
   <!-- 
   
-  - 1 o 2 personas.
   - Tendrá interfaz HTML (botones, inputs, etc).
   - Procesamiento asíncrono (con Promises y usando then, catch y finally).
   - Se puede usar fetch y XHR pero tiene que haber alguna Promise.
@@ -29,8 +28,8 @@
   <script>
     // https://jsonplaceholder.typicode.com/posts
 
-    // IDEA: traer datos del enlace, parsearlos, hacer un Array.shuffle() y
-    // formatearlos como un TL creando los nombres de usuario formato `Usuario ${userId}`
+    // IDEA: traer datos del enlace, parsearlos, hacer un shuffle y formatearlos
+    // como un TL creando los nombres de usuario formato `Usuario ${userId}`
     // coloreados en grupos de 20 (así al mezclarlos saldrán desordenados).
 
     async function traerDatos() {
@@ -38,15 +37,43 @@
         .then(response => response.json());
     }
 
-    // https://javascript.info/task/shuffle
+    // Fisher-Yates shuffle
+    // https://bost.ocks.org/mike/shuffle/
     function shuffle(array) {
-      array.sort(() => Math.random() - 0.5);
+      var m = array.length, t, i;
+
+      // While there remain elements to shuffle…
+      while (m) {
+
+        // Pick a remaining element…
+        i = Math.floor(Math.random() * m--);
+
+        // And swap it with the current element.
+        t = array[m];
+        array[m] = array[i];
+        array[i] = t;
+      }
+
+      return array;
     }
 
     function ejecucion() {
-      let datos = traerDatos();
-      datosBarajados = shuffle(datos);
+      return new Promise((resolve, reject) => {
+        let datos = traerDatos();
+        setTimeout(() => {
+          datosBarajados = shuffle(datos);
+          console.log(datos);
+        }, 1000);
+      });
     }
+
+    ejecucion();
+
+
+
+
+
+
   </script>
 </body>
 
