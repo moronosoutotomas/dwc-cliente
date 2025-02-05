@@ -36,14 +36,14 @@
 
     // Generamos el boleto ganador (6 valores absolutos del 0 al 49).
     for (let i = 0; i < 6; i++) {
-      // TODO: esto funciona mal
+      // Esto funciona mal
       winner[i] = i;
       winner[i - 1] = i;
       do {
         winner[i] = Math.abs(Math.ceil(Math.random() * 100 - 50));
       } while (winner[i] === winner[i - 1]);
-
     }
+
 
     // Generamos el bombo (50 valores absolutos del 1 al 50).
     for (let i = 0; i < 50; i++) {
