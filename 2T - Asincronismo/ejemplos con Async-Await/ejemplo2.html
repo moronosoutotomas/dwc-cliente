@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejemplo 2 Async/Await</title>
+</head>
+
+<body>
+  <script>
+
+    // Función que simula la obtención de un listado de productos
+    function obtenerProductos() {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          const productos = [
+            { id: 1, nombre: "Teclado", precio: 30 },
+            { id: 2, nombre: "Ratón", precio: 15 },
+            { id: 3, nombre: "Monitor", precio: 150 }
+          ];
+          resolve(productos);
+        }, 1500);
+      });
+    }
+
+    async function listarProductos() {
+      console.log("Solicitando productos...");
+
+      // El flujo de esta funciñon se "detiene" aqui hasta que se resuelve la Promesa
+      const lista = await obtenerProductos();
+
+      console.log("Productos recibidos: ");
+      lista.forEach(producto => {
+        console.log(`- ${producto.nombre} (ID: ${producto.id}): ${producto.precio}`);
+      });
+      console.log("Coninuando la ejecución tras haber recibido la lista.");
+    }
+
+    // Llamamos a la función asíncrona
+    listarProductos();
+
+  </script>
+</body>
+
+</html>

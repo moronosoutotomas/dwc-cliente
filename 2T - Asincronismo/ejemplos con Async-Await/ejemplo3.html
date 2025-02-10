@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejemplo 3 Async/Await</title>
+</head>
+
+<body>
+  <script>
+
+    function obtenerUsuarioPorId(id) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          if (id > 0) {
+            resolve({ id: id, nombre: "María", rol: "admin" });
+          } else {
+            reject(new Error("ID de usuario inválido"));
+          }
+        }, 1000);
+      });
+    }
+
+    async function mostrarUsuario(id) {
+      try {
+        const usuario = await obtenerUsuarioPorId(id);
+        console.log("Usuario obtenido:", usuario);
+      } catch (error) {
+        console.error("Error al obtener el usuario", error.message);
+      }
+    }
+
+    // Probamos con un ID válido
+    mostrarUsuario(2);
+
+    // Probamos con un ID inválido (lanzará una excepción)
+    mostrarUsuario(0);
+
+  </script>
+</body>
+
+</html>

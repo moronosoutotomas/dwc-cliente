@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejemplo 1 Async/Await</title>
+</head>
+
+<body>
+  <script>
+
+    /***********************
+    * VERSIÓN CON PROMESAS *
+    * *********************/
+
+    // Función que simula la obtención de datos de un servidor
+    function obtenerDatosConPromesa() {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          const datos = { usuario: 'Carlos', edad: 25 };
+
+          // Simulamos que la operación se resuelve correctamente
+          resolve(datos);
+        }, 1000);
+      });
+    }
+
+    // Uso de la función
+    obtenerDatosConPromesa()
+      .then((resultado) => {
+        console.log("Versión con Promesas - Datos recibidos: ", resultado);
+      })
+      .catch((error) => {
+        console.error("Versión con Promesas - Error", error);
+      });
+
+
+
+    /**************************
+    * VERSIÓN CON ASYNC/AWAIT *
+    * ************************/
+
+    // Función que simula la obtención de datos de un servidor, con async/await
+    async function obtenerDatosAsyncAwait() {
+      // Internamente, esta función sigue usando Promesas, pero se escribe de forma mas legible
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          const datos = { usuario: 'Carlos', edad: 25 };
+          resolve(datos);
+        }, 1000);
+      });
+    }
+
+    async function mostrarDatos() {
+      try {
+        const resultado = await obtenerDatosAsyncAwait();
+        console.log("Versión Async-Await - Datos recibidos", resultado);
+      } catch (error) {
+        console.error("Versión con Async/Await", error);
+      }
+    }
+
+    // Llamamos a la función principal para ver el resultado en consola
+    mostrarDatos();
+
+  </script>
+</body>
+
+</html>
