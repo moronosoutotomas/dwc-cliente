@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio con API OpenWeather</title>
+  <style>
+    html {
+      font-family: sans-serif;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Clima en <span id="titulo">{ciudad}</span></h1>
+  <label for="cityInput">Ciudad:
+    <input type="text" id="cityInput" name="cityInput">
+  </label>
+  <input type="submit" value="Buscar" id="buscar">
+
+  <script>
+
+    // Función que obtiene los datos de la API
+    async function getInfoClima(cityInput) {
+      // Datos API
+      const KEY = '8dcc35d09acfa33bac870b7cf523081a';
+      let URL = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput}&units=metric&lang=es&appid=${KEY}`;
+      try {
+        const response = await fetch(URL);
+        if (!response.ok) {
+          throw new Error(`Response status: ${response.status}`);
+        } else {
+          return await response.json();
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    // Función que muestra los datos obtenidos
+    async function mostrarDatos() {
+      // Recogemos el valor introducido y lo usamos en el título
+      let titulo = document.getElementById('titulo');
+      let cityInput = document.getElementById('cityInput').value;
+
+      // Si el campo está vacío mostramos un placeholder
+      titulo.textContent = cityInput ? cityInput.toUpperCase() : '{introduce tu ciudad}';
+
+      getInfoClima(cityInput);
+
+
+
+
+
+      /** FORMATO
+    * Clima en Vigo
+    * temperatura: tal en ºC
+    * humedad: 70%
+    * descrip: muy nuboso
+    * vel viento: 3.6m/s
+    */
+
+
+    }
+
+
+    // Asociamos la función al botón de enviar
+    document.getElementById('buscar').addEventListener('click', mostrarDatos);
+
+  </script>
+</body>
+
+</html>
