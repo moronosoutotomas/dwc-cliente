@@ -15,10 +15,11 @@
 <body>
   <h1>Clima en <span id="titulo">{ciudad}</span></h1>
   <label for="cityInput">Ciudad:
-    <input type="text" id="cityInput" name="cityInput">
+    <input type="text" id="cityInput" name="cityInput" placeholder="Tui, As Neves, Ponteareas ...">
   </label>
   <input type="submit" value="Buscar" id="buscar">
 
+  <div id="container"></div>
   <script>
 
     // Función que obtiene los datos de la API
@@ -47,23 +48,53 @@
       // Si el campo está vacío mostramos un placeholder
       titulo.textContent = cityInput ? cityInput.toUpperCase() : '{introduce tu ciudad}';
 
-      getInfoClima(cityInput);
+      // Almacenamos los datos de la response
+      const data = await getInfoClima(cityInput);
 
+      // Vaciamos el contenedor cada vez que se hace una petición
+      let div = document.getElementById('container');
+      div.innerHTML = '';
 
+      // Párrafo vacío por defecto
+      let paragraph1 = document.createElement('p');
+      let paragraph2 = document.createElement('p');
+      let paragraph3 = document.createElement('p');
+      let paragraph4 = document.createElement('p');
+      let paragraph5 = document.createElement('p');
 
+      // Variables con sus valores y sus unidades hechos string
+      const temperatureMin = `T. Mínima: ${data.main.temp_min} ºC`;
+      const temperatureMax = `T. Máxima: ${data.main.temp_max} ºC`;
+      const humidity = `Humedad: ${data.main.humidity} %`;
 
+      // Que no me sale de las bolas mandarlo copiando un capitalize().
+      const string = data.weather[0].description; // cadena completa
+      const first = string.charAt(0).toUpperCase(); // primera letra de la cadena
+      const rest = string.slice(1, string.length); // resto de la cadena
 
-      /** FORMATO
-    * Clima en Vigo
-    * temperatura: tal en ºC
-    * humedad: 70%
-    * descrip: muy nuboso
-    * vel viento: 3.6m/s
-    */
+      const description = `${first}${rest}`;
+      const windSpeed = `Viento: ${data.wind.speed} m/s`;
 
+      // Introducimos cada una en uno de los párrafos
+      paragraph1.textContent = temperatureMin;
+      div.appendChild(paragraph1);
+      paragraph2.textContent = temperatureMax;
+      div.appendChild(paragraph2);
+      paragraph3.textContent = humidity;
+      div.appendChild(paragraph3);
+      paragraph5.textContent = windSpeed;
+      div.appendChild(paragraph5);
 
+      // El icono del carallo con la descripción como texto alternativo
+      let iconURI = "http://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png";
+      let icon = document.createElement('img');
+      icon.setAttribute('src', iconURI);
+      icon.setAttribute('alt', description);
+      div.appendChild(icon);
+
+      paragraph4.textContent += description;
+      div.appendChild(paragraph4);
     }
-
 
     // Asociamos la función al botón de enviar
     document.getElementById('buscar').addEventListener('click', mostrarDatos);
