@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Traza con WebWorkers</title>
+  <style>
+    html {
+      font-family: sans-serif;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Traza con WebWorkers</h1>
+  <button id="boton">Traza</button><br><br>
+
+  <div id="saludo"></div><br>
+
+  <script>
+    // Traza:
+    // mensaje del workerSaludo >> mensaje del workerPregunta >> mensaje del workerDespedida
+
+    // Instanciamos el Worker
+    const workerSaludo = new Worker('ww-saludo.js');
+
+    // Instanciamos los botones para cada función
+    const boton = document.getElementById('boton');
+
+    // Instanciamos los contenedores de cada respuesta
+    const traza = document.getElementById('traza');
+
+    boton.addEventListener('click', () => {
+      workerSaludo.postMessage('Traza: ');
+    });
+
+    workerSaludo.onmessage = (event) => {
+      traza.textContent = `Mensaje desde el HPPal: ${event.data}`;
+    }
+
+  </script>
+</body>
+
+</html>

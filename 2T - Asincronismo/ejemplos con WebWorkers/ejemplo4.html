@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Ejemplo Conjunto 1 - Estadísticas con Worker</title>
+  <style>
+    #contenedorBotones {
+      margin-bottom: 10px;
+    }
+
+    #estadisticas {
+      margin-top: 10px;
+      background-color: #f5f5f5;
+      padding: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>Estadísticas con Web Worker</h2>
+  <div id="contenedorBotones">
+    <button id="btnGenerarDatos">Generar Datos y Calcular Estadísticas</button>
+    <button id="btnOtraAccion">Otra Acción (UI disponible)</button>
+  </div>
+  <div id="estado">En espera...</div>
+  <div id="estadisticas"></div>
+
+  <script>
+    const btnGenerar = document.getElementById('btnGenerarDatos');
+    const btnOtraAccion = document.getElementById('btnOtraAccion');
+    const estado = document.getElementById('estado');
+    const estadisticasDiv = document.getElementById('estadisticas');
+
+    // Creamos un Worker para el cálculo de estadísticas
+    const workerStats = new Worker('ejemplo4-web-worker.js');
+
+    // Cuando el Worker termine de procesar, actualizamos la interfaz
+    workerStats.onmessage = (event) => {
+      const { media, min, max } = event.data;
+      estado.textContent = 'Cálculo completado.';
+      estadisticasDiv.innerHTML = `
+        <p>Media de la muestra: ${media.toFixed(2)}</p>
+        <p>Valor mínimo: ${min}</p>
+        <p>Valor máximo: ${max}</p>
+      `;
+    };
+    workerStats.onerror = (event) => {
+      estado.textContent = `Error en Worker: ${event.message}`;
+    };
+
+    // Botón para generar datos y pedirle al Worker que calcule
+    btnGenerar.addEventListener('click', () => {
+      estado.textContent = 'Generando datos y calculando...';
+      estadisticasDiv.innerHTML = '';
+
+      // Generamos un array con 1 millón de números aleatorios
+      const datos = Array.from({ length: 1000000 }, () => Math.random() * 1000);
+
+      // Enviamos el array al Worker
+      workerStats.postMessage(datos);
+    });
+
+    // Botón para realizar otra acción "simulada" en la UI
+    btnOtraAccion.addEventListener('click', () => {
+      alert('La interfaz sigue respondiendo mientras se calculan estadísticas!');
+    });
+
+  </script>
+</body>
+
+</html>

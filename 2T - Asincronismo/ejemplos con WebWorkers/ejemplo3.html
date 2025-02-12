@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Limitaciones y Buenas Prácticas con Workers</title>
+</head>
+
+<body>
+  <h2>Limitaciones de Web Workers</h2>
+  <button id="btnProcesar">Procesar Lista en Worker</button>
+  <div id="output"></div>
+
+  <script>
+    const workerLim = new Worker('ejemplo3-web-worker.js');
+    const boton = document.getElementById('btnProcesar');
+    const salida = document.getElementById('output');
+    workerLim.onmessage = (event) => {
+
+      // Recibimos un array procesado y lo mostramos
+      const arrayProcesado = event.data;
+      salida.textContent = `El Worker devolvió un array de longitud: ${arrayProcesado.length}`;
+    };
+
+    boton.addEventListener('click', () => {
+      // Generamos un array grande para enviar al Worker
+      const numeros = Array.from({ length: 100000 }, (_, i) => i);
+      workerLim.postMessage(numeros);
+    });
+
+  </script>
+</body>
+
+</html>

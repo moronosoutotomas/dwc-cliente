@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comunicación con Web Worker</title>
+</head>
+
+<body>
+  <h2>Comunicación Básica con un Web Worker</h2>
+  <button id="btnEnviar">Enviar Mensaje al Worker</button>
+  <div id="respuesta"></div>
+
+  <script>
+    // 1. Crear la instancia de Worker
+    const worker = new Worker('ejemplo1-web-worker.js');
+    const boton = document.getElementById('btnEnviar');
+    const respuestaDiv = document.getElementById('respuesta');
+
+    // 2. Evento para enviar mensaje al Worker
+    boton.addEventListener('click', () => {
+      worker.postMessage('Hola, Worker!');
+    });
+
+    // 3. Escuchar respuestas del Worker
+    worker.onmessage = (event) => {
+      respuestaDiv.textContent = `Respuesta del Worker: ${event.data}`;
+    };
+
+  </script>
+</body>
+
+</html>
