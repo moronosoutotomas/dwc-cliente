@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alumnos y asignaturas</title>
+  <style>
+    html {
+      font-family: sans-serif;
+      background-color: lightgrey;
+    }
+
+    table {
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 1em;
+      border: 1px solid black;
+    }
+
+    tr:nth-child(odd) {
+      background-color: lightblue;
+    }
+
+    th {
+      background-color: darkgray;
+    }
+  </style>
+</head>
+
+<body>
+  <!--
+      1. Formulario de entrada:
+      - Debes crear un formulario HTML donde el usuario pueda introducir:
+      - Una lista de asignaturas separadas por comas (por ejemplo: "Matemáticas, Historia, Física").
+      - Una lista de alumnos separados por comas (por ejemplo: "Juan, María, Pedro").
+  -->
+
+  <h1>Formulario de Asignaturas, Alumnos y Notas</h1>
+  <label for="asignaturas">Asignaturas:</label>
+  <input type="text" name="asignaturas" id="asignaturas">
+  <br><br>
+
+  <label for="alumnos">Alumnos:</label>
+  <input type="text" name="alumnos" id="alumnos">
+  <br><br>
+
+  <input type="button" value="Enviar" onclick="enviar()">
+  <br><br>
+
+  <div id="container"></div>
+  <script>
+
+    /*
+      2. Proceso de generación de notas:
+      - Al enviar el formulario, se debe procesar la información de los alumnos y las asignaturas. Para
+      cada alumno, en cada asignatura, se debe generar una nota aleatoria con dos decimales entre 0 y 10.
+      - Las notas se almacenarán en un array bidimensional.
+    */
+
+    let asignaturas = (document.getElementById("asignaturas").value).split(',');
+    let alumnos = (document.getElementById("alumnos").value).split(', ');
+    let notas = [];
+
+    function procesamiento() {
+      notas = [];
+      // calculo notas para cada asignatura (por cada alumno)
+      alumnos.forEach(alumno => {
+        notasAlumno = asignaturas.map(() => (Math.random() * 10).toFixed(2));
+        notas.push({
+          alumno,
+          notas: notasAlumno
+        });
+      });
+    }
+
+    function enviar() {
+      procesamiento();
+      mostrarTabla();
+      //console.log(asignaturas);
+      //console.log(alumnos);
+      console.log(notas);
+    };
+
+    /*
+      3. Mostrar tabla de resultados:
+      - Debes crear un botón que, al ser presionado, muestre una tabla con:
+      - Una cabecera que contenga los nombres de las asignaturas.
+      - Una fila por cada alumno, mostrando su nombre y las notas generadas para cada asignatura.
+      - En la última columna de cada fila, se debe calcular y mostrar la media de las notas de cada
+      alumno.
+      - Al final de la tabla, una fila adicional debe mostrar la media de las notas obtenidas en cada
+      asignatura (media por asignatura).
+    */
+
+    // accesorios
+    let container = document.getElementById('container');
+    let tabla = document.createElement('table');
+
+    function mostrarTabla() {
+      // vaciamos el contenedor
+      container.innerHTML = '';
+      tabla.innerHTML = '';
+
+      // encabezado
+      let thead = document.createElement('thead');
+      let row = document.createElement('tr');
+      let th = document.createElement('th');
+      th.textContent = '-';
+      row.appendChild(th);
+
+      asignaturas.forEach(asignatura => {
+        let text = document.createTextNode(asignatura);
+        let th = document.createElement('th');
+        th.appendChild(text);
+        row.appendChild(th);
+      });
+      // celda para la media del capitán
+      let mediaCell = document.createElement('th');
+      mediaCell.textContent = 'Media alumno';
+      row.appendChild(mediaCell);
+      thead.appendChild(row);
+
+      // cuerpo
+      let tbody = document.createElement('tbody');
+
+      // recorrido notas generales (obj es un alumno)
+      notas.forEach(obj => {
+        let tr = document.createElement('tr');
+        // nombre alumno
+        let td = document.createElement('td');
+        let nombreAlumno = document.createTextNode(obj.alumno);
+        td.appendChild(nombreAlumno);
+        tr.appendChild(td);
+
+        // notas alumno
+        let mediaAlumno = 0;
+        let mediaAsignatura = 0;
+
+        // calculo media por alumno
+        let tdMedia = document.createElement('td');
+        tdMedia.textContent = (sumaNotas / obj.notas.length).toFixed(2);
+        tr.appendChild(tdMedia);
+        tbody.appendChild(tr);
+
+        // calculo media por asignatura
+        for (let i = 0; i <= obj.notas.length; i++) {
+          mediaAlumno += parseFloat(obj.notas[i]);
+          let td = document.createElement('td');
+          let valorNota = document.createTextNode(obj.notas[i]);
+          td.appendChild(valorNota);
+          tr.appendChild(td);
+
+        }
+
+      });
+
+      // añadimos todo al body
+      tabla.appendChild(thead);
+      tabla.appendChild(tbody);
+      container.appendChild(tabla);
+    }
+
+  </script>
+</body>
+
+</html>

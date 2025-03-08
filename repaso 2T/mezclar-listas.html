@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mezclar listas</title>
+</head>
+
+<body>
+
+  <script>
+    const body = document.body;
+
+    function mostrarForm() {
+      // h3
+      let titulo = document.createElement('h3');
+      titulo.textContent = 'Mezcla de listas';
+      body.appendChild(titulo);
+
+      // label 1
+      let label1 = document.createElement('label');
+      label1.textContent = 'Primera lista: ';
+      body.appendChild(label1);
+      // input 1ª lista
+      let input1 = document.createElement('input');
+      input1.setAttribute('type', 'text');
+      input1.setAttribute('id', 'input1');
+      body.appendChild(input1);
+      // select 1ª lista
+      let select1 = document.createElement('select');
+      select1.setAttribute('id', 'select1');
+      // options select 1
+      let option1 = document.createElement('option');
+      option1.textContent = '3';
+      option1.setAttribute('value', '3');
+      let option2 = document.createElement('option');
+      option2.textContent = '5';
+      option2.setAttribute('value', '5');
+      select1.appendChild(option1);
+      select1.appendChild(option2);
+      body.appendChild(select1);
+      body.appendChild(document.createElement('br')); // otro br
+      body.appendChild(document.createElement('br')); // otro br
+
+      // label 2
+      let label2 = document.createElement('label');
+      label2.textContent = 'Segunda lista: ';
+      body.appendChild(label2);
+      // input 2ª lista
+      let input2 = document.createElement('input');
+      input2.setAttribute('type', 'text');
+      input2.setAttribute('id', 'input2');
+      body.appendChild(input2);
+      // select 2ª lista
+      let select2 = document.createElement('select');
+      select2.setAttribute('id', 'select2');
+      body.appendChild(select2);
+      // options select 1
+      let option3 = document.createElement('option');
+      option3.textContent = '5';
+      option3.setAttribute('value', '5');
+      let option4 = document.createElement('option');
+      option4.textContent = '7';
+      option4.setAttribute('value', '7');
+      select2.appendChild(option3);
+      select2.appendChild(option4);
+      body.appendChild(select2);
+
+      body.appendChild(document.createElement('br')); // otro br
+      body.appendChild(document.createElement('br')); // otro br
+
+      // boton mezclar
+      let mezclar = document.createElement('input');
+      mezclar.setAttribute('type', 'submit');
+      mezclar.setAttribute('id', 'enviar');
+      mezclar.setAttribute('value', 'Enviar');
+      body.appendChild(mezclar);
+      // boton reiniciar
+      let reiniciar = document.createElement('input');
+      reiniciar.setAttribute('type', 'reset');
+      reiniciar.setAttribute('id', 'reiniciar');
+      reiniciar.setAttribute('value', 'Reiniciar');
+      body.appendChild(reiniciar);
+
+      body.appendChild(document.createElement('br')); // otro br
+      body.appendChild(document.createElement('br')); // otro br
+    }
+
+    mostrarForm();
+  </script>
+</body>
+
+</html>
