@@ -5,6 +5,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mezclar listas</title>
+  <style>
+    html {
+      font-family: system-ui;
+      background-color: lightblue;
+    }
+
+    body {
+      padding: 1em 2em;
+    }
+  </style>
 </head>
 
 <body>
@@ -12,6 +22,18 @@
   <script>
     const body = document.body;
 
+    // reloj kinétiko HH:MM:SS
+    function peluco() {
+      let date = new Date();
+      p.textContent = `Hora actual: ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}:${date.getSeconds().toString().padStart(2, '0')}`;
+      body.appendChild(p);
+    }
+
+    let p = document.createElement('p');
+    //setInterval(peluco, 1000);
+
+
+    // formulario dinámico
     function mostrarForm() {
       // h3
       let titulo = document.createElement('h3');
@@ -73,13 +95,12 @@
       // boton mezclar
       let mezclar = document.createElement('input');
       mezclar.setAttribute('type', 'submit');
-      mezclar.setAttribute('id', 'enviar');
       mezclar.setAttribute('value', 'Enviar');
+      mezclar.setAttribute('onclick', 'procesarArrays()');
       body.appendChild(mezclar);
       // boton reiniciar
       let reiniciar = document.createElement('input');
       reiniciar.setAttribute('type', 'reset');
-      reiniciar.setAttribute('id', 'reiniciar');
       reiniciar.setAttribute('value', 'Reiniciar');
       body.appendChild(reiniciar);
 
@@ -88,6 +109,47 @@
     }
 
     mostrarForm();
+
+    // check tamaño arrays
+    let p2 = document.createElement('p');
+    function procesarArrays() {
+
+      // listas de números
+      let arr1 = document.getElementById('input1').value.split(',');
+      let arr2 = document.getElementById('input2').value.split(',');
+
+      // longitud de las listas
+      let arr1Length = document.getElementById('select1').value;
+      let arr2Length = document.getElementById('select2').value;
+
+      // comprobamos que la longitud coincide
+      if (arr1.length != arr1Length) {
+        alert('La primera lista NO ES igual al tamaño seleccionado');
+      } else if (arr2.length != arr2Length) {
+        alert('La segunda lista NO ES igual al tamaño seleccionado');
+      }
+
+      // creamos una variable que siempre tenga la longitud del array mayor y un
+      // nuevo array para almacenar la lista mezclada
+      const listaLarga = (arr1.length >= arr2.length) ? arr1.length : arr2.length;
+      let arrFinal = [];
+
+      // mezclamos las listas
+      for (let i = 0; i < listaLarga; i++) {
+        if (arr1[i] !== undefined) {
+          arrFinal.push(arr1[i]);
+        }
+
+        if (arr2[i] !== undefined) {
+          arrFinal.push(arr2[i]);
+        }
+      }
+
+      p2.textContent = `Resultado: ${arrFinal}`;
+    }
+    body.appendChild(p2);
+
+
   </script>
 </body>
 

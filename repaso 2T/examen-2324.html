@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Examen 2023-24</title>
+  <style>
+    html {
+      font-family: system-ui;
+      background-color: lightblue;
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+    // genera dinamicamente:
+    // un titulo con el texto "calculadora conversora de temperatura"
+    // input con temperaturas separadas por comas
+    // boton convertir
+    // 2 radio: alto contraste (monocromo), coloreado (default)
+    // otro peluco, tron
+
+    window.onload = () => {
+      // titulo
+      let titulo = document.createElement('h1');
+      titulo.textContent = 'Calculadora conversora de temperatura';
+      document.body.appendChild(titulo);
+
+      // label
+      let label = document.createElement('label');
+      label.textContent = 'Temperaturas: ';
+      document.body.appendChild(label);
+
+      // input
+      let input = document.createElement('input');
+      input.setAttribute('type', 'text');
+      input.setAttribute('id', 'temperaturas');
+      document.body.appendChild(input);
+
+      document.body.appendChild(document.createElement('br')); // br
+      document.body.appendChild(document.createElement('br')); // br
+
+      // boton Celsius
+      let botonCelsius = document.createElement('input');
+      botonCelsius.setAttribute('type', 'submit');
+      botonCelsius.setAttribute('value', 'Convertir Celsius');
+      botonCelsius.setAttribute('onclick', 'procesarCelsius()');
+      document.body.appendChild(botonCelsius);
+
+      // boton Kelvin
+      let botonKelvin = document.createElement('input');
+      botonKelvin.setAttribute('type', 'submit');
+      botonKelvin.setAttribute('value', 'Convertir Kelvin');
+      botonKelvin.setAttribute('onclick', 'procesarKelvin()');
+      document.body.appendChild(botonKelvin);
+
+      // boton Fahrenheit
+      let botonFahrenheit = document.createElement('input');
+      botonFahrenheit.setAttribute('type', 'submit');
+      botonFahrenheit.setAttribute('value', 'Convertir Fahrenheit');
+      botonFahrenheit.setAttribute('onclick', 'procesarFahrenheit()');
+      document.body.appendChild(botonFahrenheit);
+
+      document.body.appendChild(document.createElement('br')); // br
+      document.body.appendChild(document.createElement('br')); // br
+
+      // radios
+      let altoContraste = document.createElement('input');
+      altoContraste.setAttribute('type', 'radio');
+      altoContraste.setAttribute('name', 'tema');
+      altoContraste.setAttribute('value', 'altoContraste');
+      altoContraste.setAttribute('id', 'altoContraste');
+      document.body.appendChild(altoContraste);
+
+      let labelAltoContraste = document.createElement('label');
+      labelAltoContraste.setAttribute('for', 'altoContraste');
+      labelAltoContraste.textContent = 'Tema de alto contraste';
+      document.body.appendChild(labelAltoContraste);
+
+      let coloreado = document.createElement('input');
+      coloreado.setAttribute('type', 'radio');
+      coloreado.setAttribute('name', 'tema');
+      coloreado.setAttribute('value', 'coloreado');
+      coloreado.setAttribute('id', 'coloreado');
+      coloreado.setAttribute('checked', '');
+      document.body.appendChild(coloreado);
+
+      let labelColoreado = document.createElement('label');
+      labelColoreado.setAttribute('for', 'coloreado');
+      labelColoreado.textContent = 'Tema coloreado';
+      document.body.appendChild(labelColoreado);
+
+      document.body.appendChild(document.createElement('br')); // br
+      document.body.appendChild(document.createElement('br')); // br
+    };
+
+
+    // CELSIUS, FAHRENHEIT y KELVIN
+    //    0ºC = 32ºF = 273.15K
+    function procesarCelsius() {
+      let celsius = document.getElementById('temperaturas').value.split(',');
+      let kelvin, fahrenheit;
+      let tema = document.querySelector("input[name='tema']:checked").value;
+
+
+      celsius.forEach(dato => {
+        let pK = document.createElement('p');
+        pK.textContent = `Kelvin: ${(parseFloat(dato) + 273.15).toFixed(2)}`;
+        pK.style.fontSize = '18px';
+        pK.style.fontWeight = 'bold';
+        pK.style.color = 'green';
+
+        let pF = document.createElement('p');
+        pF.textContent = `Fahrenheit: ${(parseFloat(dato) + 32).toFixed(2)}`;
+        pF.style.fontSize = '18px';
+        pF.style.fontWeight = 'bold';
+        pF.style.color = 'red';
+
+        if (tema == 'altoContraste') {
+          pF.style.color = 'white';
+          pF.style.backgroundColor = 'black';
+          pK.style.color = 'white';
+          pK.style.backgroundColor = 'black';
+        }
+
+        document.body.appendChild(pK);
+        document.body.appendChild(pF);
+      });
+    }
+
+    function procesarKelvin() {
+      // lo mismo que celsius
+    }
+
+    function procesarFahrenheit() {
+      // lo mismo que celsius
+    }
+
+    // l'orologio per la dona
+    let p = document.createElement('p');
+    setInterval(
+      () => {
+        let time = new Date();
+        p.textContent = `Hora actual: ${time.getHours().toString().padStart(2, '0')}:${time.getMinutes().toString().padStart(2, '0')}:${time.getSeconds().toString().padStart(2, '0')}`;
+        document.body.appendChild(p);
+      }, 1000);
+  </script>
+</body>
+
+</html>

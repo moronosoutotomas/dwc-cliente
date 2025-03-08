@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reserva de motos</title>
+  <style>
+    html {
+      font-family: system-ui;
+      background-color: lightblue;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Reserva de motiños neno</h1>
+  <form action="">
+    <fieldset>
+      <legend>Fechas</legend>
+      <label for="recogida">Fecha de recogida</label>
+      <input type="date" id="recogida">
+      <br><br>
+      <label for="entrega">Fecha de entrega</label>
+      <input type="date" id="entrega">
+    </fieldset>
+    <br>
+    <fieldset>
+      <legend>Motiños</legend>
+      <input type="radio" name="motos" id="honda" value="85">Honda
+      <input type="radio" name="motos" id="yamaha" value="90">Yamaha
+      <input type="radio" name="motos" id="triumph" value="95">Triumph
+      <br><br>
+      <input type="button" value="Calculación" onclick="calc()">
+    </fieldset>
+  </form>
+
+  <script>
+
+    let h3 = document.createElement('h3');
+    let min = new Date(); // fecha minima, fecha de hoy
+    let hoy = `${min.getFullYear()}-${(min.getMonth() + 1).toString().padStart(2, '0')}-${min.getDate().toString().padStart(2, '0')}`;
+    let mañana = `${min.getFullYear()}-${(min.getMonth() + 1).toString().padStart(2, '0')}-${(min.getDate() + 1).toString().padStart(2, '0')}`;
+    document.getElementById('recogida').setAttribute('min', hoy);
+    document.getElementById('entrega').setAttribute('min', mañana);
+
+    function calc() {
+      let moto = document.querySelector("input[name='motos']:checked").value;
+      let recogida = new Date(document.getElementById('recogida').value);
+      let entrega = new Date(document.getElementById('entrega').value);
+
+      // 86.400.000 ms = 1000 * 3.600 * 24 = 1 day
+      let totalDias = (entrega - recogida) / 86400000;
+      h3.textContent = `Precio total reserva: ${totalDias * moto}€`;
+    }
+
+    document.body.appendChild(h3);
+
+  </script>
+</body>
+
+</html>
