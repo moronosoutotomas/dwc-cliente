@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Examen 2024-25</title>
+  <style>
+    html {
+      font-family: system-ui;
+      background-color: lightblue;
+    }
+
+    table {
+      margin: 2.5em 2em;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: .75em 2em;
+      border: 1px solid black;
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+
+    generarReloj();
+    generarFormulario();
+
+    function generarFormulario() {
+      // Un título con el texto "Gestión de Inventario"
+      const titulo = document.createElement('h1');
+      titulo.textContent = 'Gestión de Inventario'
+      document.body.appendChild(titulo);
+
+      // Un campo de entrada (input) para que el usuario introduzca productos separados por comas.
+      let labelProductos = document.createElement('label');
+      labelProductos.textContent = 'Productos: ';
+      labelProductos.setAttribute('for', 'productos');
+      document.body.appendChild(labelProductos);
+      let inputProductos = document.createElement('input');
+      inputProductos.setAttribute('type', 'text');
+      inputProductos.setAttribute('id', 'productos');
+      document.body.appendChild(inputProductos);
+
+      // Un botón con el texto "Añadir Productos" para enviar los productos al inventario.
+      let botonProductos = document.createElement('input');
+      botonProductos.setAttribute('type', 'submit');
+      botonProductos.setAttribute('id', 'añadirProductos');
+      botonProductos.setAttribute('value', 'Añadir Productos');
+      botonProductos.setAttribute('onclick', 'procesarDatos()');
+      document.body.appendChild(botonProductos);
+
+      document.body.appendChild(document.createElement('br')); // </br>
+      document.body.appendChild(document.createElement('br')); // </br>
+
+      // Un grupo de radiobuttons con dos opciones:
+      // - Ordenar alfabéticamente por nombre.
+      // - Ordenar por fecha y hora de adición.
+      let radioNombre = document.createElement('input');
+      radioNombre.setAttribute('type', 'radio');
+      radioNombre.setAttribute('name', 'orden');
+      radioNombre.setAttribute('value', 'nombre');
+      radioNombre.setAttribute('onclick', 'getOrder()');
+      radioNombre.setAttribute('checked', '');
+      document.body.appendChild(radioNombre);
+      let labelOrdenNombre = document.createElement('label');
+      labelOrdenNombre.textContent = 'Ordenar por nombre';
+      labelOrdenNombre.setAttribute('for', 'nombre');
+      document.body.appendChild(labelOrdenNombre);
+
+      let radioFecha = document.createElement('input');
+      radioFecha.setAttribute('type', 'radio');
+      radioFecha.setAttribute('name', 'orden');
+      radioFecha.setAttribute('value', 'fecha');
+      radioFecha.setAttribute('onclick', 'getOrder()');
+      document.body.appendChild(radioFecha);
+      let labelOrdenFecha = document.createElement('label');
+      labelOrdenFecha.textContent = 'Ordenar por fecha';
+      labelOrdenFecha.setAttribute('for', 'fecha');
+      document.body.appendChild(labelOrdenFecha);
+    }
+
+
+    // Una tabla con una cabecera que contenga las columnas "Elemento" y "TimeStamp".
+    // La tabla debe generarse vacía inicialmente.
+    let tablaProductos = document.createElement('table');
+
+    // Array de productos
+    let productos = [];
+
+    function procesarDatos() {
+      let nuevosProductos = document.getElementById('productos').value.split(',');
+      let fechaActual = new Date();
+      let ms = Date.now();
+
+      // analizamos si el array nuevo contiene alguno de los elementos a añadir
+      if (productos.some(p => nuevosProductos.includes(p.nombre))) {
+        alert('Alguno de los productos ya existe en el inventario, retíralo antes de continuar.');
+      } else {
+
+        // fecha de registro de los productos
+        fechaRegistro = `${fechaActual.getDate().toString().padStart(2, '0')}-${fechaActual.getMonth().toString().padStart(2, '0')}-${fechaActual.getFullYear().toString().padStart(2, '0')}, ${fechaActual.getHours().toString().padStart(2, '0')}:${fechaActual.getMinutes().toString().padStart(2, '0')}:${fechaActual.getSeconds().toString().padStart(2, '0')}`;
+
+        // añadimos los nuevos productos
+        nuevosProductos.forEach(producto => {
+          productos.push({ nombre: producto, fechaRegistro, value: ms })
+        });
+      }
+      getOrder();
+    }
+
+    function mostrarTabla() {
+      // construimos el encabezado de la tabla
+      tablaProductos.textContent = '';
+      let thead = document.createElement('thead');
+      let elemento = document.createElement('th');
+      elemento.textContent = 'Elemento';
+      let timestamp = document.createElement('th');
+      timestamp.textContent = 'TimeStamp';
+      thead.appendChild(elemento);
+      thead.appendChild(timestamp);
+      tablaProductos.appendChild(thead);
+
+      // construimos el cuerpo de la tabla
+      let tbody = document.createElement('tbody');
+
+      productos.forEach(producto => {
+        let row = document.createElement('tr');
+        let nombre = document.createElement('td');
+        nombre.textContent = producto.nombre;
+        let fecha = document.createElement('td');
+        fecha.textContent = producto.fechaRegistro;
+
+        row.appendChild(nombre);
+        row.appendChild(fecha);
+        tbody.appendChild(row);
+      });
+
+      // añadimos la tabla al DOM
+      tablaProductos.appendChild(tbody);
+      document.body.appendChild(tablaProductos);
+    }
+
+
+
+    function getOrder() {
+      let orden = document.querySelector("input[name='orden']:checked").value;
+      if (orden == 'fecha') {
+        productos.sort((a, b) => a.value - b.value);
+      } else {
+        productos.sort((a, b) => {
+          const nameA = a.nombre.toUpperCase();
+          const nameB = b.nombre.toUpperCase();
+
+          if (nameA < nameB) {
+            return -1;
+          } else {
+            return 1;
+          }
+        });
+      }
+      mostrarTabla();
+    }
+
+
+    // Un reloj digital que muestre la hora actual, con el formato HH:MM:SS,
+    // alineado a la izquierda y precedido por la etiqueta "Hora actual:".
+    function generarReloj() {
+      const reloj = document.createElement('div');
+      reloj.style.textAlign = 'right';
+      reloj.style.fontSize = '1.5em'
+      reloj.style.padding = '0.5em';
+      reloj.style.margin = '0.5em';
+
+      setInterval(() => {
+        let fecha = new Date();
+        reloj.textContent = `Hora actual: ${fecha.getHours().toString().padStart(2, '0')}:${fecha.getMinutes().toString().padStart(2, '0')}:${fecha.getSeconds().toString().padStart(2, '0')}`;
+      }, 1000);
+      document.body.appendChild(reloj);
+    }
+
+  </script>
+</body>
+
+</html>
