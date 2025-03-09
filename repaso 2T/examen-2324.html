@@ -113,7 +113,7 @@
         pK.style.color = 'green';
 
         let pF = document.createElement('p');
-        pF.textContent = `Fahrenheit: ${(parseFloat(dato) + 32).toFixed(2)}`;
+        pF.textContent = `Fahrenheit: ${(parseFloat(dato) * 9 / 5 + 32).toFixed(2)}`;
         pF.style.fontSize = '18px';
         pF.style.fontWeight = 'bold';
         pF.style.color = 'red';
@@ -131,11 +131,65 @@
     }
 
     function procesarKelvin() {
-      // lo mismo que celsius
+      let kelvin = document.getElementById('temperaturas').value.split(',');
+      let celsius, fahrenheit;
+      let tema = document.querySelector("input[name='tema']:checked").value;
+
+
+      kelvin.forEach(dato => {
+        let pK = document.createElement('p');
+        pK.textContent = `Celsius: ${(parseFloat(dato) - 273.15).toFixed(2)}`;
+        pK.style.fontSize = '18px';
+        pK.style.fontWeight = 'bold';
+        pK.style.color = 'green';
+
+        let pF = document.createElement('p');
+        pF.textContent = `Fahrenheit: ${(parseFloat(dato) * 9 / 5 - 459.67).toFixed(2)}`;
+        pF.style.fontSize = '18px';
+        pF.style.fontWeight = 'bold';
+        pF.style.color = 'red';
+
+        if (tema == 'altoContraste') {
+          pF.style.color = 'white';
+          pF.style.backgroundColor = 'black';
+          pK.style.color = 'white';
+          pK.style.backgroundColor = 'black';
+        }
+
+        document.body.appendChild(pK);
+        document.body.appendChild(pF);
+      });
     }
 
     function procesarFahrenheit() {
-      // lo mismo que celsius
+      let fahrenheit = document.getElementById('temperaturas').value.split(',');
+      let celsius, kelvin;
+      let tema = document.querySelector("input[name='tema']:checked").value;
+
+
+      fahrenheit.forEach(dato => {
+        let pK = document.createElement('p');
+        pK.textContent = `Celsius: ${((parseFloat(dato) - 32) * 5 / 9).toFixed(2)}`;
+        pK.style.fontSize = '18px';
+        pK.style.fontWeight = 'bold';
+        pK.style.color = 'green';
+
+        let pF = document.createElement('p');
+        pF.textContent = `Kelvin: ${(parseFloat(dato) * 9 / 5 - 459.67).toFixed(2)}`;
+        pF.style.fontSize = '18px';
+        pF.style.fontWeight = 'bold';
+        pF.style.color = 'red';
+
+        if (tema == 'altoContraste') {
+          pF.style.color = 'white';
+          pF.style.backgroundColor = 'black';
+          pK.style.color = 'white';
+          pK.style.backgroundColor = 'black';
+        }
+
+        document.body.appendChild(pK);
+        document.body.appendChild(pF);
+      });
     }
 
     // l'orologio per la dona
