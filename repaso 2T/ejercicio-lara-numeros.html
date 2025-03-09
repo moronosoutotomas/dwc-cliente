@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Los números de Larota</title>
+  <style>
+    html {
+      background-color: rgba(0, 0, 0, 0.3);
+      font-family: system-ui;
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+    // CONTENEDORES
+    let contenedorFormulario = document.createElement('div'); // formulario
+    let contenedorTablaPrimos = document.createElement('div'); // tabla primos
+    let contenedorTablaPares = document.createElement('div'); // tabla pares
+    let contenedorTablaImpares = document.createElement('div'); // tabla impares
+
+    // CALLS
+    //lorologio();
+    generarFormulario();
+
+    // peluco
+    function lorologio() {
+      let pocketoWatcho = document.createElement('div');
+      setInterval(() => {
+        let keoraes = new Date();
+        pocketoWatcho.textContent = `${keoraes.getHours().toString().padStart(2, '0')}:${keoraes.getMinutes().toString().padStart(2, '0')}:${keoraes.getSeconds().toString().padStart(2, '0')}`;
+      }, 1000);
+      pocketoWatcho.style.padding = '.5em 0';
+      pocketoWatcho.style.backgroundColor = 'white';
+      pocketoWatcho.style.fontSize = '2em';
+      pocketoWatcho.style.textAlign = 'center';
+      document.body.appendChild(pocketoWatcho);
+    }
+
+    // generar el formulario
+    function generarFormulario() {
+      contenedorFormulario.textContent = '';
+
+      let titulo = document.createElement('h1');
+      titulo.textContent = 'Titulo';
+
+      let labelNumeros = document.createElement('label');
+      labelNumeros.textContent = 'Números: ';
+      labelNumeros.setAttribute('for', 'numeros');
+      let inputNumeros = document.createElement('input');
+      inputNumeros.setAttribute('type', 'text');
+      inputNumeros.setAttribute('id', 'numeros');
+
+      let botonNumeros = document.createElement('input');
+      botonNumeros.setAttribute('type', 'submit');
+      botonNumeros.setAttribute('value', 'Añadir');
+      botonNumeros.setAttribute('onclick', 'procesarDatos()'); // procesarDatos()
+
+      let radioOrderAsc = document.createElement('input');
+      radioOrderAsc.setAttribute('type', 'radio');
+      radioOrderAsc.setAttribute('name', 'orden');
+      radioOrderAsc.setAttribute('value', 'ascendente');
+      radioOrderAsc.setAttribute('id', 'ascendente');
+      radioOrderAsc.setAttribute('checked', '');
+      radioOrderAsc.setAttribute('onclick', 'ordenar()'); // ordenar()
+      let labelAsc = document.createElement('label');
+      labelAsc.textContent = 'Orden ascendente'
+      labelAsc.setAttribute('for', 'ascendente');
+
+      let radioOrderDesc = document.createElement('input');
+      radioOrderDesc.setAttribute('type', 'radio');
+      radioOrderDesc.setAttribute('name', 'orden');
+      radioOrderDesc.setAttribute('value', 'descendente');
+      radioOrderDesc.setAttribute('onclick', 'ordenar()'); // ordenar()
+      let labelDesc = document.createElement('label');
+      labelDesc.textContent = 'Orden descendente'
+      labelDesc.setAttribute('for', 'descendente');
+
+      // añadimos las cosiñas al container y este a su vez al body
+      contenedorFormulario.appendChild(titulo);
+      contenedorFormulario.appendChild(labelNumeros);
+      contenedorFormulario.appendChild(inputNumeros);
+      contenedorFormulario.appendChild(botonNumeros);
+      contenedorFormulario.appendChild(document.createElement('br'));
+      contenedorFormulario.appendChild(document.createElement('br'));
+      contenedorFormulario.appendChild(radioOrderAsc);
+      contenedorFormulario.appendChild(labelAsc);
+      contenedorFormulario.appendChild(radioOrderDesc);
+      contenedorFormulario.appendChild(labelDesc);
+      document.body.appendChild(contenedorFormulario);
+    }
+
+    // procesar datos
+    let numeros = [];
+    let pares = [], impares = [], primos = [];
+
+    function procesarDatos() {
+      numeros = document.getElementById('numeros').value.split(',').map((n) => n.trim());
+
+      numeros.map(n => {
+        // check si es primo
+        if (n != 0 && n != 1) {
+          let divisor = 0;
+          for (let i = 1; i <= n; i++) {
+            if (n % i == 0) {
+              divisor++;
+            }
+          }
+
+          if (divisor <= 2) {
+            primos.push(n);
+          }
+        }
+
+        // check si es par/impar
+        if (n % 2 == 0) {
+          pares.push(n);
+        } else {
+          impares.push(n);
+        }
+      });
+
+      ordenar();
+    }
+
+    // ordenación
+    function ordenar() {
+      let orden = document.querySelector("input[name='orden']:checked").value;
+
+      if (orden == 'descendente') {
+        pares.sort((a, b) => b - a);
+        impares.sort((a, b) => b - a);
+        primos.sort((a, b) => b - a);
+      } else {
+        pares.sort((a, b) => a - b);
+        impares.sort((a, b) => a - b);
+        primos.sort((a, b) => a - b);
+      }
+
+      mostrarTabla(primos);
+    }
+
+    // mostrar tabla (con los datos de turno, primos, pares o impares)
+    let tablaPrimos = document.createElement('table');
+    tablaPrimos.style.borderCollapse = 'collapse';
+    tablaPrimos.style.margin = '1em';
+    let tablaPares = document.createElement('table');
+    let tablaImpares = document.createElement('table');
+
+    function mostrarTabla(arr) {
+      tablaPrimos.textContent = '';
+
+      arr.forEach(item => {
+        // maybe falta tbody
+        let cell = document.createElement('td');
+        cell.style.border = '1px solid black';
+        cell.style.padding = '1em';
+        let row = document.createElement('tr');
+        cell.textContent = item;
+        row.appendChild(cell);
+        tablaPrimos.appendChild(row);
+      });
+
+      document.body.appendChild(tablaPrimos);
+    }
+
+
+  </script>
+</body>
+
+</html>
