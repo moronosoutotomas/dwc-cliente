@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen recuperación 1T JS - Tomás</title>
+    <style>
+        html {
+            font-family: sans-serif;
+            background-color: lightblue;
+        }
+
+				table {
+					border-collapse: collapse;
+				}
+
+				tr {
+					background-color: lightgrey;
+				}
+
+				tr:nth-child(odd) {
+					background-color: grey;
+				}
+
+				tr:hover{
+					background-color: #fff;
+				}
+
+				th,td{
+					padding: 0.5em 2em;
+					border: 1px solid black;
+				}
+    </style>
+</head>
+<body>
+    <script>
+			// CALLS
+			setInterval(reloj, 1000);
+			generarFormulario();
+			
+
+			// reloj
+    let watch = document.createElement('p');
+		document.body.appendChild(watch);
+
+		function reloj () {
+			let time = new Date();
+			watch.textContent = `Hora actual: ${time.getHours().toString().padStart(2,'0')}:${time.getMinutes().toString().padStart(2,'0')}:${time.getSeconds().toString().padStart(2,'0')}`;
+    }
+
+
+		// generar formulario
+		function generarFormulario() {
+			// titulo
+			let titulo = document.createElement('h1');
+			titulo.textContent = 'Gestión de Inventario';
+			document.body.appendChild(titulo);
+
+			// label productos
+			let labelProductos = document.createElement('label');
+			labelProductos.textContent = 'Productos: ';
+			labelProductos.setAttribute('for', 'productos');
+			document.body.appendChild(labelProductos);
+
+			// input productos
+			let inputProductos = document.createElement('input');
+			inputProductos.setAttribute('type', 'text');
+			inputProductos.setAttribute('id', 'productos');
+			document.body.appendChild(inputProductos);
+
+			// boton agregar producto
+			let botonProductos = document.createElement('input');
+			botonProductos.setAttribute('type', 'submit');
+			botonProductos.setAttribute('value', 'Agregar');
+			botonProductos.setAttribute('onclick', 'procesarDatos()'); // procesarDatos()
+			document.body.appendChild(botonProductos);
+
+			// boton volver a empezar
+			let reset = document.createElement('input');
+			reset.setAttribute('type', 'reset');
+			reset.setAttribute('value', 'Volver a empezar');
+			reset.setAttribute('onclick', 'reset()'); // reset()
+			document.body.appendChild(reset);
+
+			document.body.appendChild(document.createElement('br')); // </br>
+			document.body.appendChild(document.createElement('br')); // </br>
+
+			// radios ordenacion
+			let radioAsc = document.createElement('input');
+			radioAsc.setAttribute('type', 'radio');
+			radioAsc.setAttribute('name', 'orden');
+			radioAsc.setAttribute('value', 'nombre');
+			radioAsc.setAttribute('id', 'nombre');
+			radioAsc.setAttribute('checked', '');
+			radioAsc.setAttribute('onclick', 'ordenar()'); // ordenar()
+			document.body.appendChild(radioAsc);
+			let labelAsc = document.createElement('label');
+			labelAsc.setAttribute('for', 'nombre')
+			labelAsc.textContent = 'Ordenar por nombre';
+			document.body.appendChild(labelAsc);
+			
+			let radioDesc = document.createElement('input');
+			radioDesc.setAttribute('type', 'radio');
+			radioDesc.setAttribute('name', 'orden');
+			radioDesc.setAttribute('value', 'fecha');
+			radioDesc.setAttribute('id', 'fecha');
+			radioDesc.setAttribute('onclick', 'ordenar()'); // ordenar()
+			document.body.appendChild(radioDesc);			
+			let labelDesc = document.createElement('label');
+			labelDesc.setAttribute('for', 'fecha')
+			labelDesc.textContent = 'Ordenar por fecha de adición';
+			document.body.appendChild(labelDesc);
+		}
+
+
+		// procesar productos
+		let productos = [];
+
+		function procesarDatos() {
+			let nuevosProductos = document.getElementById('productos').value.split(',');
+
+			//no recuerdo bien la sintaxis de esto y no podemos usar la API :c
+			 /* if (productos.some(productos.includes(nuevosProductos.producto))) {
+				alert('No deben introducirse productos repetidos');
+			} */
+
+			let fecha = new Date();
+			fecha = `${fecha.getHours().toString().padStart(2,'0')}:${fecha.getMinutes().toString().padStart(2,'0')}:${fecha.getSeconds().toString().padStart(2,'0')}`;
+				
+			nuevosProductos.forEach(producto => {
+					productos.push({ producto, fechaAdicion : fecha })
+				});
+
+				ordenar();
+		}
+
+
+		// ordenar productos
+		function ordenar () {
+			let orden = document.querySelector("input[name='orden']:checked").value;
+
+			/* if (orden == 'fecha') {
+				productos = productos.sort((a, b) => a.fechaAdicion - b.fechaAdicion);
+			} else {
+				productos = productos.sort((a, b) => a.producto.toUpperCase() - b.producto.toUpperCase());
+			} */
+
+			mostrarTabla();
+		}
+
+
+		// boton 'volver a empezar'
+		function reset() {
+			productos = [];
+			tabla.textContent = '';
+		}
+
+
+		// mostrar tabla
+		let tabla = document.createElement('table');
+
+		function mostrarTabla () {
+			tabla.textContent = '';
+
+			let tr = document.createElement('tr');
+			let thElemento = document.createElement('th');
+			let thTimestamp = document.createElement('th');
+			thElemento.textContent = 'Elemento';
+			thTimestamp.textContent = 'TimeStamp';
+			tr.appendChild(thElemento);
+			tr.appendChild(thTimestamp);
+			tabla.appendChild(tr);
+			
+			productos.forEach(producto => {
+				let cellProducto = document.createElement('td');
+				let cellFecha = document.createElement('td');
+				let row = document.createElement('tr');
+
+				cellProducto.textContent = producto.producto;
+				cellFecha.textContent = producto.fechaAdicion;
+
+				row.appendChild(cellProducto);
+				row.appendChild(cellFecha);
+				tabla.appendChild(row);
+			});
+
+			document.body.appendChild(tabla);
+		}
+
+    </script>
+</body>
+</html>
